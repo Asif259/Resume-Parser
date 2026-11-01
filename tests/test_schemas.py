@@ -80,3 +80,4 @@ def test_parse_response_model():
     )
     assert res.id == "test-uuid"
     assert res.parsed_resume.personal_info.name == "Alice"
+

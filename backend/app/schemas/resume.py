@@ -49,3 +49,4 @@ class ParseResponse(BaseModel):
     filename: str
     parsed_resume: ParsedResume
     created_at: datetime = Field(default_factory=datetime.now)
+
