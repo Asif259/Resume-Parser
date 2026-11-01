@@ -57,24 +57,84 @@ def _looks_like_degree(line: str) -> bool:
 
 
 def _split_into_blocks(text: str) -> list[list[str]]:
-    """Split section text into blocks separated by blank lines."""
-    lines = text.split("\n")
-    blocks: list[list[str]] = []
+    """Split section text into blocks separated by blank lines or date-line transitions."""
+    raw_lines = text.split("\n")
+    initial_blocks: list[list[str]] = []
     current_block: list[str] = []
 
-    for line in lines:
+    for line in raw_lines:
         stripped = line.strip()
         if not stripped:
             if current_block:
-                blocks.append(current_block)
+                initial_blocks.append(current_block)
                 current_block = []
         else:
             current_block.append(stripped)
 
     if current_block:
-        blocks.append(current_block)
+        initial_blocks.append(current_block)
 
-    return blocks
+    # Sub-split blocks if multiple date lines are detected in a single block (compact formatting)
+    final_blocks: list[list[str]] = []
+    bullet_prefixes = ("-", "•", "*", "–", "—", "▪", "▫", "·")
+
+    for block in initial_blocks:
+        date_indices = [i for i, line in enumerate(block) if _is_date_line(line)]
+        if len(date_indices) <= 1:
+            final_blocks.append(block)
+            continue
+
+        # Split at boundaries between records
+        split_points = [0]
+        for d_idx in date_indices[1:]:
+            # Scan backwards from d_idx to find non-bullet header lines (up to 2 lines)
+            boundary = d_idx
+            while boundary > split_points[-1]:
+                prev_line = block[boundary - 1]
+                if any(prev_line.startswith(p) for p in bullet_prefixes):
+                    break
+                boundary -= 1
+                if d_idx - boundary >= 2:
+                    break
+            if boundary > split_points[-1]:
+                split_points.append(boundary)
+
+        split_points.append(len(block))
+        for start, end in zip(split_points[:-1], split_points[1:]):
+            sub_block = block[start:end]
+            if sub_block:
+                final_blocks.append(sub_block)
+
+    return final_blocks
+
+def _split_title_company(line: str) -> tuple[Optional[str], Optional[str]]:
+    """Splits a single line into (title, company) using delimiters: pipe, bullet, 'at', or comma."""
+    # 1. Pipe or bullet delimiter: "Title | Company"
+    if re.search(r'\s*[|•·]\s*', line):
+        parts = re.split(r'\s*[|•·]\s*', line, maxsplit=1)
+        p0, p1 = parts[0].strip(), parts[1].strip()
+        if _looks_like_job_title(p0):
+            return p0, p1
+        elif _looks_like_job_title(p1):
+            return p1, p0
+        return p0, p1
+
+    # 2. "Title at Company"
+    if re.search(r'\s+at\s+', line, re.IGNORECASE):
+        parts = re.split(r'\s+at\s+', line, maxsplit=1, flags=re.IGNORECASE)
+        return parts[0].strip(), parts[1].strip()
+
+    # 3. "Title, Company"
+    if re.search(r',\s+', line):
+        parts = re.split(r',\s+', line, maxsplit=1)
+        p0, p1 = parts[0].strip(), parts[1].strip()
+        if _looks_like_job_title(p0):
+            return p0, p1
+        elif _looks_like_job_title(p1):
+            return p1, p0
+        return p0, p1
+
+    return None, None
 
 
 def _parse_experience_block(block: list[str]) -> dict:
@@ -108,15 +168,11 @@ def _parse_experience_block(block: list[str]) -> dict:
             continue
         if _looks_like_job_title(line):
             title_line_idx = i
-            # Check if title and company are on the same line separated by comma or "at"
-            if re.search(r',\s+', line):
-                parts = re.split(r',\s+', line, maxsplit=1)
-                record["job_title"] = parts[0].strip()
-                record["company"] = parts[1].strip()
-            elif re.search(r'\s+at\s+', line, re.IGNORECASE):
-                parts = re.split(r'\s+at\s+', line, maxsplit=1, flags=re.IGNORECASE)
-                record["job_title"] = parts[0].strip()
-                record["company"] = parts[1].strip()
+            t, c = _split_title_company(line)
+            if t:
+                record["job_title"] = t
+                if c:
+                    record["company"] = c
             else:
                 record["job_title"] = line.strip()
             break
@@ -125,18 +181,14 @@ def _parse_experience_block(block: list[str]) -> dict:
     if record["job_title"] is None:
         for i, line in enumerate(block):
             if i != date_line_idx:
-                # Check for "Title, Company" or "Title at Company" pattern
-                if re.search(r',\s+', line):
-                    parts = re.split(r',\s+', line, maxsplit=1)
-                    record["job_title"] = parts[0].strip()
-                    record["company"] = parts[1].strip()
-                elif re.search(r'\s+at\s+', line, re.IGNORECASE):
-                    parts = re.split(r'\s+at\s+', line, maxsplit=1, flags=re.IGNORECASE)
-                    record["job_title"] = parts[0].strip()
-                    record["company"] = parts[1].strip()
+                title_line_idx = i
+                t, c = _split_title_company(line)
+                if t:
+                    record["job_title"] = t
+                    if c:
+                        record["company"] = c
                 else:
                     record["job_title"] = line.strip()
-                title_line_idx = i
                 break
 
     # Company: next line after title if not already set

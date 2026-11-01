@@ -36,3 +36,32 @@ def test_empty_sections():
     assert grouped.experience == []
     assert grouped.education == []
 
+def test_compact_format_no_blank_lines():
+    """Experience entries separated by date lines, no blank lines."""
+    text = (
+        "Software Engineer\nAcme Corp\nJan 2020 - Present\n"
+        "- Built APIs\n- Led team\n"
+        "Junior Developer\nStartup Inc\nJun 2018 - Dec 2019\n"
+        "- Wrote tests"
+    )
+    sections = {"experience": text}
+    entities = extract_entities(sections)
+    result = group_information(sections, entities)
+    assert len(result.experience) == 2
+    assert result.experience[0]["job_title"] == "Software Engineer"
+    assert result.experience[1]["job_title"] == "Junior Developer"
+
+def test_company_first_format():
+    text = "Google\nSoftware Engineer\nJan 2020 - Present\n- Built systems"
+    sections = {"experience": text}
+    result = group_information(sections, extract_entities(sections))
+    assert result.experience[0]["company"] == "Google"
+    assert result.experience[0]["job_title"] == "Software Engineer"
+
+def test_pipe_separator_title_company():
+    text = "Software Engineer | Acme Corp\nJan 2020 - Dec 2022\n- Did work"
+    sections = {"experience": text}
+    result = group_information(sections, extract_entities(sections))
+    assert result.experience[0]["job_title"] == "Software Engineer"
+    assert result.experience[0]["company"] == "Acme Corp"
+
