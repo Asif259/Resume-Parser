@@ -5,6 +5,8 @@ __pycache__/
 .pytest_cache/
 *.db
 uploads/*
+backend/uploads/*
+!backend/uploads/.gitkeep
 !uploads/.gitkeep
 .env
 .DS_Store
