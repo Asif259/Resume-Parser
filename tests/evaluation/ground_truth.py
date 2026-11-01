@@ -21,3 +21,4 @@ def load_ground_truth_dir(dir_path: Union[str, Path]) -> List[GroundTruth]:
     for file_path in sorted(dir_path.glob("*.json")):
         results.append(load_ground_truth(file_path))
     return results
+

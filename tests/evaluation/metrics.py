@@ -74,3 +74,4 @@ def compute_metrics(comparisons: List[FieldComparison]) -> EvaluationMetrics:
         total_fields=total_fields,
         field_scores=field_scores,
     )
+

@@ -29,3 +29,4 @@ def test_pipeline_parsed_resume_has_confidence(sample_pdf_bytes, tmp_path: Path)
     assert result.confidence_score is not None
     assert 0.0 <= result.confidence_score <= 1.0
     assert isinstance(result.low_confidence_fields, list)
+

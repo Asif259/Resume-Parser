@@ -25,3 +25,4 @@ def format_report(report: EvaluationReport) -> str:
     lines.append("=" * 68)
 
     return "\n".join(lines)
+

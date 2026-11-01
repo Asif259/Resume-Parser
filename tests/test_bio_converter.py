@@ -58,3 +58,4 @@ def test_bio_roundtrip(tmp_path: Path):
     save_bio_file(bio_data, out_file)
     loaded = load_bio_file(out_file)
     assert loaded == bio_data
+

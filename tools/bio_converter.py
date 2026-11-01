@@ -88,3 +88,4 @@ def load_bio_file(path: Union[str, Path]) -> List[Tuple[str, str]]:
             if len(parts) >= 2:
                 results.append((parts[0], parts[1]))
     return results
+

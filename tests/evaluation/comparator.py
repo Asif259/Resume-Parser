@@ -139,3 +139,4 @@ def compare_resumes(expected: ParsedResume, actual: ParsedResume) -> List[FieldC
                 )
 
     return comparisons
+

@@ -356,3 +356,4 @@ def generate_fixtures():
 
 if __name__ == "__main__":
     generate_fixtures()
+

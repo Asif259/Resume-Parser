@@ -43,3 +43,4 @@ def test_pipeline_parsed_resume_includes_evidence(sample_pdf_bytes, tmp_path: Pa
     assert len(result.evidence) > 0
     # Check that personal info or skills are recorded in evidence
     assert any("email" in k or "name" in k or "skills" in k for k in result.evidence.keys())
+

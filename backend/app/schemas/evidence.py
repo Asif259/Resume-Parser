@@ -8,3 +8,4 @@ class FieldEvidence(BaseModel):
     source_text: str
     confidence: float = 1.0
     page: Optional[int] = None
+
