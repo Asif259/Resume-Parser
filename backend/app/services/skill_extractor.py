@@ -1,4 +1,5 @@
 import re
+from app.schemas.evidence import FieldEvidence
 
 # Canonical skill name -> list of aliases (all lowercase)
 SKILL_DICTIONARY: dict[str, list[str]] = {
@@ -208,14 +209,10 @@ def _match_skill_in_text(text_lower: str, alias: str) -> bool:
     return bool(re.search(pattern, text_lower))
 
 
-def extract_skills(sections: dict[str, str]) -> list[str]:
-    """Extract and normalize skills from resume sections.
-
-    1. Parse skills section by comma/pipe/newline delimiters and match against dictionary.
-    2. Scan other sections for skill mentions using word-boundary matching.
-    3. Deduplicate and sort.
-    """
+def extract_skills_with_evidence(sections: dict[str, str]) -> tuple[list[str], dict[str, FieldEvidence]]:
+    """Extract and normalize skills from resume sections, preserving field evidence."""
     found: set[str] = set()
+    evidence: dict[str, FieldEvidence] = {}
 
     skills_text = sections.get("skills", "")
 
@@ -226,35 +223,68 @@ def extract_skills(sections: dict[str, str]) -> list[str]:
             token_clean = token.strip().lower()
             if not token_clean:
                 continue
-            # Direct lookup
             canonical = _ALIAS_TO_CANONICAL.get(token_clean)
             if canonical:
                 found.add(canonical)
+                if canonical not in evidence:
+                    evidence[canonical] = FieldEvidence(
+                        value=token.strip(),
+                        normalized_value=canonical,
+                        source_section="skills",
+                        source_text=token.strip(),
+                        confidence=0.95,
+                    )
                 continue
-            # Try substring match within the token for multi-word skills
             for alias, canon in _ALIAS_TO_CANONICAL.items():
                 if alias in token_clean and _match_skill_in_text(token_clean, alias):
                     found.add(canon)
+                    if canon not in evidence:
+                        evidence[canon] = FieldEvidence(
+                            value=alias,
+                            normalized_value=canon,
+                            source_section="skills",
+                            source_text=token.strip(),
+                            confidence=0.90,
+                        )
 
     # 2. Scan other sections for skill mentions
     scan_sections = ["experience", "summary", "projects", "education", "other"]
-    scan_text = " ".join(sections.get(k, "") for k in scan_sections).lower()
-
-    if scan_text.strip():
+    for sec_name in scan_sections:
+        sec_text = sections.get(sec_name, "")
+        if not sec_text.strip():
+            continue
+        sec_lower = sec_text.lower()
         for alias, canonical in _ALIAS_TO_CANONICAL.items():
             if canonical in found:
                 continue
             if len(alias) <= 2 and alias in _SHORT_SKILLS:
-                # Extra strict for very short aliases: require exact word boundary
-                if _match_skill_in_text(scan_text, alias):
-                    # Additional check: "go" must not be just the verb
+                if _match_skill_in_text(sec_lower, alias):
                     if alias == "go":
-                        # Only match "Go" or "Golang", not "go to" "go ahead"
-                        continue  # Skip "go" from non-skills sections
+                        continue
                     found.add(canonical)
-            elif alias in scan_text:
-                if _match_skill_in_text(scan_text, alias):
+                    evidence[canonical] = FieldEvidence(
+                        value=alias,
+                        normalized_value=canonical,
+                        source_section=sec_name,
+                        source_text=alias,
+                        confidence=0.75,
+                    )
+            elif alias in sec_lower:
+                if _match_skill_in_text(sec_lower, alias):
                     found.add(canonical)
+                    evidence[canonical] = FieldEvidence(
+                        value=alias,
+                        normalized_value=canonical,
+                        source_section=sec_name,
+                        source_text=alias,
+                        confidence=0.75,
+                    )
 
-    return sorted(found)
+    return sorted(found), evidence
+
+
+def extract_skills(sections: dict[str, str]) -> list[str]:
+    """Extract and normalize skills from resume sections."""
+    skills, _ = extract_skills_with_evidence(sections)
+    return skills
 

@@ -7,7 +7,7 @@ from app.services.ocr_extractor import extract_image, extract_pdf_ocr
 from app.services.preprocessor import preprocess
 from app.services.section_detector import detect_sections
 from app.services.entity_extractor import extract_entities
-from app.services.skill_extractor import extract_skills
+from app.services.skill_extractor import extract_skills_with_evidence
 from app.services.information_grouper import group_information
 from app.services.normalizer import normalize
 
@@ -44,18 +44,23 @@ def parse_resume(file_path: Path, file_type: str) -> ParsedResume:
     entities = extract_entities(sections)
 
     # 5. Skill Extraction & Normalization
-    skills = extract_skills(sections)
+    skills, skill_evidence = extract_skills_with_evidence(sections)
 
     # 6. Information Grouping (Experience & Education)
     grouped = group_information(sections, entities)
 
     # 7. Normalization and Pydantic Validation
+    evidence_dict = {}
+    for skill_name, ev in skill_evidence.items():
+        evidence_dict[f"skills.{skill_name}"] = ev
+
     parsed_resume = normalize(
         sections=sections,
         entities=entities,
         grouped=grouped,
         skills=skills,
         raw_text=raw_text,
+        evidence=evidence_dict,
     )
 
     return parsed_resume

@@ -2,6 +2,7 @@ import re
 from dataclasses import dataclass, field
 from typing import Optional
 import spacy
+from app.schemas.evidence import FieldEvidence
 
 # Load spaCy model once
 _nlp = spacy.load("en_core_web_sm")
@@ -44,6 +45,7 @@ class ExtractedEntities:
     dates: list[str] = field(default_factory=list)
     degrees: list[str] = field(default_factory=list)
     institutions: list[str] = field(default_factory=list)
+    evidence: dict[str, FieldEvidence] = field(default_factory=dict)
 
 
 def _extract_email(text: str) -> Optional[str]:
@@ -191,11 +193,56 @@ def extract_entities(sections: dict[str, str]) -> ExtractedEntities:
     entities.name = _extract_name(personal, entities.email, entities.phone)
     entities.location = _extract_location(personal, entities.email, entities.phone, entities.name)
 
+    # Record evidence
+    if entities.name:
+        entities.evidence["personal_info.name"] = FieldEvidence(
+            value=entities.name,
+            source_section="personal_info" if entities.name in personal else "all_text",
+            source_text=personal[:300] if personal else entities.name,
+            confidence=0.90,
+        )
+    if entities.email:
+        entities.evidence["personal_info.email"] = FieldEvidence(
+            value=entities.email,
+            source_section="personal_info" if entities.email in personal else "all_text",
+            source_text=entities.email,
+            confidence=0.99,
+        )
+    if entities.phone:
+        entities.evidence["personal_info.phone"] = FieldEvidence(
+            value=entities.phone,
+            source_section="personal_info" if entities.phone in personal else "all_text",
+            source_text=entities.phone,
+            confidence=0.90,
+        )
+    if entities.location:
+        entities.evidence["personal_info.location"] = FieldEvidence(
+            value=entities.location,
+            source_section="personal_info" if entities.location in personal else "all_text",
+            source_text=entities.location,
+            confidence=0.85,
+        )
+
     # LinkedIn / GitHub
     linkedin_match = LINKEDIN_PATTERN.search(all_text)
     github_match = GITHUB_PATTERN.search(all_text)
     entities.linkedin = linkedin_match.group(0) if linkedin_match else None
     entities.github = github_match.group(0) if github_match else None
+
+    if entities.linkedin:
+        entities.evidence["personal_info.linkedin"] = FieldEvidence(
+            value=entities.linkedin,
+            source_section="all_text",
+            source_text=entities.linkedin,
+            confidence=0.99,
+        )
+    if entities.github:
+        entities.evidence["personal_info.github"] = FieldEvidence(
+            value=entities.github,
+            source_section="all_text",
+            source_text=entities.github,
+            confidence=0.99,
+        )
 
     # Dates from experience and education sections
     for section_key in ("experience", "education"):

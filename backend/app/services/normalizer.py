@@ -9,6 +9,7 @@ from app.schemas.resume import (
     Project,
     ParsedResume,
 )
+from app.schemas.evidence import FieldEvidence
 from app.services.entity_extractor import ExtractedEntities
 from app.services.information_grouper import GroupedInfo
 
@@ -125,8 +126,12 @@ def normalize(
     grouped: GroupedInfo,
     skills: list[str],
     raw_text: Optional[str] = None,
+    evidence: Optional[dict[str, FieldEvidence]] = None,
 ) -> ParsedResume:
     """Assembles all extracted, categorized, and grouped data into a validated ParsedResume."""
+    evidence_map: dict[str, FieldEvidence] = dict(evidence or {})
+    if hasattr(entities, "evidence") and entities.evidence:
+        evidence_map.update(entities.evidence)
 
     # 1. Personal Info
     personal_info = PersonalInfo(
@@ -140,10 +145,17 @@ def normalize(
 
     # 2. Summary
     summary = sections.get("summary")
+    if summary and "professional_summary" not in evidence_map:
+        evidence_map["professional_summary"] = FieldEvidence(
+            value=summary[:100],
+            source_section="summary",
+            source_text=summary[:300],
+            confidence=0.95,
+        )
 
     # 3. Work Experience
     experience_list: list[Experience] = []
-    for exp in grouped.experience:
+    for idx, exp in enumerate(grouped.experience):
         raw_end = exp.get("end_date")
         is_current = None
         if raw_end and re.match(r'(?i)^(present|current|now|ongoing)$', str(raw_end).strip()):
@@ -152,10 +164,27 @@ def normalize(
         else:
             normalized_end = normalize_date(raw_end)
 
+        job_title = exp.get("job_title")
+        company = exp.get("company")
+        if job_title:
+            evidence_map[f"experience.{idx}.job_title"] = FieldEvidence(
+                value=job_title,
+                source_section="experience",
+                source_text=job_title,
+                confidence=0.85,
+            )
+        if company:
+            evidence_map[f"experience.{idx}.company"] = FieldEvidence(
+                value=company,
+                source_section="experience",
+                source_text=company,
+                confidence=0.85,
+            )
+
         experience_list.append(
             Experience(
-                job_title=exp.get("job_title"),
-                company=exp.get("company"),
+                job_title=job_title,
+                company=company,
                 start_date=normalize_date(exp.get("start_date")),
                 end_date=normalized_end,
                 is_current=is_current,
@@ -165,11 +194,28 @@ def normalize(
 
     # 4. Education
     education_list: list[Education] = []
-    for edu in grouped.education:
+    for idx, edu in enumerate(grouped.education):
+        degree = edu.get("degree")
+        institution = edu.get("institution")
+        if degree:
+            evidence_map[f"education.{idx}.degree"] = FieldEvidence(
+                value=degree,
+                source_section="education",
+                source_text=degree,
+                confidence=0.90,
+            )
+        if institution:
+            evidence_map[f"education.{idx}.institution"] = FieldEvidence(
+                value=institution,
+                source_section="education",
+                source_text=institution,
+                confidence=0.90,
+            )
+
         education_list.append(
             Education(
-                degree=edu.get("degree"),
-                institution=edu.get("institution"),
+                degree=degree,
+                institution=institution,
                 graduation_year=edu.get("graduation_year"),
                 field_of_study=edu.get("field_of_study"),
             )
@@ -197,5 +243,6 @@ def normalize(
         projects=projects,
         languages=languages,
         raw_text=raw_text,
+        evidence=evidence_map if evidence_map else None,
     )
 

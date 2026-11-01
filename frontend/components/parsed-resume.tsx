@@ -37,9 +37,16 @@ export function ParsedResumeView({ resume, filename }: ParsedResumeViewProps) {
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mt-2">
             {personal_info.name || "Unnamed Candidate"}
           </h1>
-          {filename && (
-            <p className="text-xs text-gray-400 mt-1">Parsed from: {filename}</p>
-          )}
+          <div className="flex items-center gap-3 mt-1">
+            {filename && (
+              <p className="text-xs text-gray-400">Parsed from: {filename}</p>
+            )}
+            {resume.evidence && (
+              <span className="text-[11px] font-medium text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100">
+                Provenance tracked ({Object.keys(resume.evidence).length} fields)
+              </span>
+            )}
+          </div>
 
           {/* Contact Details */}
           <div className="flex flex-wrap items-center gap-y-2 gap-x-6 mt-4 text-sm text-gray-600">

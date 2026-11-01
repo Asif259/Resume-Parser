@@ -1,6 +1,7 @@
 from datetime import datetime
 from typing import Optional
 from pydantic import BaseModel, EmailStr, Field
+from app.schemas.evidence import FieldEvidence
 
 class PersonalInfo(BaseModel):
     name: Optional[str] = None
@@ -44,6 +45,7 @@ class ParsedResume(BaseModel):
     projects: list[Project] = Field(default_factory=list)
     languages: list[str] = Field(default_factory=list)
     raw_text: Optional[str] = None
+    evidence: Optional[dict[str, FieldEvidence]] = None
 
 class ParseResponse(BaseModel):
     id: str

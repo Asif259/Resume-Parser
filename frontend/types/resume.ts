@@ -35,6 +35,15 @@ export interface Project {
   technologies: string[];
 }
 
+export interface FieldEvidence {
+  value: string;
+  normalized_value: string | null;
+  source_section: string;
+  source_text: string;
+  confidence: number;
+  page: number | null;
+}
+
 export interface ParsedResume {
   personal_info: PersonalInfo;
   professional_summary: string | null;
@@ -45,6 +54,7 @@ export interface ParsedResume {
   projects: Project[];
   languages: string[];
   raw_text: string | null;
+  evidence?: Record<string, FieldEvidence> | null;
 }
 
 export interface ParseResponse {
