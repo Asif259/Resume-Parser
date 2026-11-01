@@ -81,6 +81,10 @@ SKILL_DICTIONARY: dict[str, list[str]] = {
     "GCP": ["gcp", "google cloud", "google cloud platform"],
     "Terraform": ["terraform"],
     "Ansible": ["ansible"],
+    "Pulumi": ["pulumi"],
+    "CloudFormation": ["cloudformation"],
+    "Chef": ["chef"],
+    "Puppet": ["puppet"],
     "Jenkins": ["jenkins"],
     "CircleCI": ["circleci", "circle ci"],
     "GitHub Actions": ["github actions"],
@@ -91,6 +95,41 @@ SKILL_DICTIONARY: dict[str, list[str]] = {
     "Heroku": ["heroku"],
     "Netlify": ["netlify"],
     "Linux": ["linux", "ubuntu", "centos", "debian"],
+
+    # Data Engineering
+    "Spark": ["spark", "apache spark"],
+    "Airflow": ["airflow", "apache airflow"],
+    "dbt": ["dbt"],
+    "Flink": ["flink", "apache flink"],
+    "Snowflake": ["snowflake"],
+    "BigQuery": ["bigquery", "big query"],
+    "Redshift": ["redshift"],
+    "Databricks": ["databricks"],
+    "Fivetran": ["fivetran"],
+    "Hadoop": ["hadoop"],
+
+    # Observability & Monitoring
+    "Prometheus": ["prometheus"],
+    "Grafana": ["grafana"],
+    "Datadog": ["datadog"],
+    "New Relic": ["new relic", "newrelic"],
+    "Splunk": ["splunk"],
+    "ELK": ["elk", "elk stack", "logstash", "kibana"],
+    "OpenTelemetry": ["opentelemetry", "otel"],
+    "Jaeger": ["jaeger"],
+
+    # Security
+    "OWASP": ["owasp"],
+    "Vault": ["vault", "hashicorp vault"],
+    "SAML": ["saml"],
+
+    # Modern Frameworks
+    "Remix": ["remix"],
+    "Astro": ["astro"],
+    "SolidJS": ["solid", "solidjs", "solid.js"],
+    "htmx": ["htmx"],
+    "Turbo": ["turbo", "turbopack", "turborepo"],
+    "Stimulus": ["stimulus"],
 
     # Tools
     "Git": ["git"],
@@ -158,7 +197,7 @@ for canonical, aliases in SKILL_DICTIONARY.items():
         _ALIAS_TO_CANONICAL[alias.lower()] = canonical
 
 # Skills that need word boundary matching to avoid false positives
-_SHORT_SKILLS = {"go", "r", "c", "c#", "c++", "rust", "dart", "lua", "perl", "rest", "jwt", "git"}
+_SHORT_SKILLS = {"go", "r", "c", "c#", "c++", "rust", "dart", "lua", "perl", "rest", "jwt", "git", "dbt"}
 
 
 def _match_skill_in_text(text_lower: str, alias: str) -> bool:
