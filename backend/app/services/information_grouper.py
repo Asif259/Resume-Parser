@@ -232,3 +232,4 @@ def group_information(sections: dict[str, str], entities: ExtractedEntities) -> 
                 grouped.education.append(record)
 
     return grouped
+

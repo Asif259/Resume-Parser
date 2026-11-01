@@ -43,3 +43,4 @@ def test_case_insensitive_matching():
     assert "Python" in skills
     assert "JavaScript" in skills
     assert "Docker" in skills
+

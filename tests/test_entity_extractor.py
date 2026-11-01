@@ -32,3 +32,4 @@ def test_extract_linkedin_github():
 def test_unicode_email():
     entities = extract_entities({"personal_info": "rené.müller@example.com"})
     assert entities.email is not None
+

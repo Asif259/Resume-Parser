@@ -35,3 +35,4 @@ def test_empty_sections():
     grouped = group_information(sections, entities)
     assert grouped.experience == []
     assert grouped.education == []
+

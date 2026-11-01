@@ -89,3 +89,4 @@ def detect_sections(text: str) -> dict[str, str]:
             result[key] = joined
 
     return result
+

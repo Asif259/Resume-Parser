@@ -145,3 +145,4 @@ def extract_entities(sections: dict[str, str]) -> ExtractedEntities:
                 entities.companies.append(ent.text.strip())
 
     return entities
+

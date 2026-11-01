@@ -218,3 +218,4 @@ def extract_skills(sections: dict[str, str]) -> list[str]:
                     found.add(canonical)
 
     return sorted(found)
+

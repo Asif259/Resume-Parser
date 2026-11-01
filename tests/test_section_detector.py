@@ -34,3 +34,4 @@ def test_languages_section():
     sections = detect_sections(text)
     assert "Python" in sections["skills"]
     assert "English" in sections["languages"]
+
