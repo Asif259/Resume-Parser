@@ -59,3 +59,4 @@ def extract_pdf_ocr(path: Path, dpi: int = 200) -> ExtractedText:
         method="pdf_ocr",
         metadata={"file_size": path.stat().st_size if path.exists() else 0},
     )
+

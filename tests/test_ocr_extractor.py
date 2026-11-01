@@ -36,3 +36,4 @@ def test_extract_pdf_ocr_fallback(tmp_path, sample_pdf_bytes):
     assert isinstance(result, ExtractedText)
     assert result.method == "pdf_ocr"
     assert "John" in result.text
+
