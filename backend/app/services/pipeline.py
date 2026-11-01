@@ -10,6 +10,7 @@ from app.services.entity_extractor import extract_entities
 from app.services.skill_extractor import extract_skills_with_evidence
 from app.services.information_grouper import group_information
 from app.services.normalizer import normalize
+from app.services.confidence import compute_overall_confidence, flag_low_confidence
 
 def parse_resume(file_path: Path, file_type: str) -> ParsedResume:
     """End-to-end orchestration pipeline:
@@ -62,6 +63,10 @@ def parse_resume(file_path: Path, file_type: str) -> ParsedResume:
         raw_text=raw_text,
         evidence=evidence_dict,
     )
+
+    if parsed_resume.evidence:
+        parsed_resume.confidence_score = compute_overall_confidence(parsed_resume.evidence)
+        parsed_resume.low_confidence_fields = flag_low_confidence(parsed_resume.evidence)
 
     return parsed_resume
 

@@ -55,6 +55,8 @@ export interface ParsedResume {
   languages: string[];
   raw_text: string | null;
   evidence?: Record<string, FieldEvidence> | null;
+  confidence_score?: number | null;
+  low_confidence_fields?: string[];
 }
 
 export interface ParseResponse {

@@ -46,6 +46,8 @@ class ParsedResume(BaseModel):
     languages: list[str] = Field(default_factory=list)
     raw_text: Optional[str] = None
     evidence: Optional[dict[str, FieldEvidence]] = None
+    confidence_score: Optional[float] = None
+    low_confidence_fields: list[str] = Field(default_factory=list)
 
 class ParseResponse(BaseModel):
     id: str
