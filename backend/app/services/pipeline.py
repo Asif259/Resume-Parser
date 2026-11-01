@@ -59,3 +59,4 @@ def parse_resume(file_path: Path, file_type: str) -> ParsedResume:
     )
 
     return parsed_resume
+

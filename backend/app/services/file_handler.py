@@ -26,3 +26,4 @@ def validate_and_save_file(filename: str, content: bytes) -> Tuple[Path, str, st
     saved_path.write_bytes(content)
 
     return saved_path, ext, doc_id
+

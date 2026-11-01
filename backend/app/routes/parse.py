@@ -82,3 +82,4 @@ def list_parsed_resumes(skip: int = 0, limit: int = 50, db: Session = Depends(ge
             )
         )
     return results
+

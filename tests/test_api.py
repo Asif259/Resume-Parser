@@ -46,3 +46,4 @@ def test_list_resumes(test_client, sample_pdf_bytes):
     assert isinstance(data, list)
     assert len(data) >= 1
     assert any(r["filename"] == "listed_resume.pdf" for r in data)
+

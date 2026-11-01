@@ -58,3 +58,4 @@ def test_validate_file_too_large(tmp_path, monkeypatch):
             filename="large.pdf",
             content=b"x" * 100
         )
+

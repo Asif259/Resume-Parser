@@ -39,3 +39,4 @@ def test_save_and_retrieve_resume():
         assert any(r.id == doc_id for r in all_resumes)
     finally:
         db.close()
+

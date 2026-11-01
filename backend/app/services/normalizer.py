@@ -189,3 +189,4 @@ def normalize(
         languages=languages,
         raw_text=raw_text,
     )
+

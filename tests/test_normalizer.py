@@ -75,3 +75,4 @@ def test_normalize_assembles_parsed_resume():
     assert len(resume.certifications) >= 1
     assert len(resume.projects) >= 1
     assert "English" in resume.languages[0]
+
