@@ -155,29 +155,29 @@ def _extract_name(text: str, email: Optional[str], phone: Optional[str]) -> Opti
 
 
 def _extract_location(text: str, email: Optional[str], phone: Optional[str], name: Optional[str]) -> Optional[str]:
+    # First priority: "City, Country" or "City, State" pattern in personal_info lines
+    location_pattern = re.compile(r'\b([A-Z][a-zA-Z\s]+,\s*[A-Z][a-zA-Z\s]+)\b')
+    for line in text.split("\n"):
+        stripped = line.strip()
+        if not stripped:
+            continue
+        parts = re.split(r'[|•·]', stripped)
+        for part in parts:
+            part = part.strip()
+            if email and email in part:
+                continue
+            if phone and phone in part:
+                continue
+            m = location_pattern.search(part)
+            if m:
+                return m.group(1).strip()
+
+    # Fallback to spaCy GPE/LOC
     doc = _nlp(text)
     for ent in doc.ents:
         if ent.label_ in ("GPE", "LOC"):
             return ent.text.strip()
 
-    # Fallback: look for "City, Country" or "City, State" pattern in personal_info
-    location_pattern = re.compile(r'[A-Z][a-zA-Z\s]+,\s*[A-Z][a-zA-Z\s]+')
-    for line in text.split("\n"):
-        stripped = line.strip()
-        if email and email in stripped:
-            # Check after pipe/bar separators
-            parts = re.split(r'[|•·]', stripped)
-            for part in parts:
-                part = part.strip()
-                if email in part or (phone and phone in part):
-                    continue
-                m = location_pattern.search(part)
-                if m:
-                    return m.group(0).strip()
-        else:
-            m = location_pattern.search(stripped)
-            if m:
-                return m.group(0).strip()
     return None
 
 
