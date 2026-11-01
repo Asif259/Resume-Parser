@@ -39,3 +39,4 @@ def test_strip_trailing_and_leading_whitespace_per_line():
     lines = result.cleaned.split("\n")
     for line in lines:
         assert line == line.strip()
+
