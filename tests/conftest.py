@@ -60,3 +60,4 @@ def sample_docx_bytes():
     stream = io.BytesIO()
     doc.save(stream)
     return stream.getvalue()
+

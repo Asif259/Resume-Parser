@@ -8,3 +8,4 @@ def test_health_check(test_client):
 def test_fixtures(sample_pdf_bytes, sample_docx_bytes):
     assert len(sample_pdf_bytes) > 0
     assert len(sample_docx_bytes) > 0
+
