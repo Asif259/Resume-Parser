@@ -50,3 +50,4 @@ export function ExperienceCard({ experience }: ExperienceCardProps) {
     </div>
   );
 }
+

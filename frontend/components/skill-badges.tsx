@@ -22,3 +22,4 @@ export function SkillBadges({ skills }: SkillBadgesProps) {
     </div>
   );
 }
+

@@ -52,3 +52,4 @@ export interface ParseResponse {
   parsed_resume: ParsedResume;
   created_at: string;
 }
+

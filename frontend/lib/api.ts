@@ -48,3 +48,4 @@ export async function listResumes(): Promise<ParseResponse[]> {
 
   return res.json();
 }
+
