@@ -43,3 +43,4 @@ def extract_pdf(path: Path) -> ExtractedText:
         method=method,
         metadata={"file_size": path.stat().st_size if path.exists() else 0},
     )
+
