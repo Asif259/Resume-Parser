@@ -60,29 +60,95 @@ def _extract_phone(text: str) -> Optional[str]:
     return None
 
 
+DISALLOWED_NAME_WORDS = {
+    "resume", "curriculum", "vitae", "cv", "profile", "summary",
+    "experience", "education", "skills", "projects", "certifications",
+    "languages", "contact", "email", "phone", "address", "page",
+    "university", "college", "school", "institute", "technologies",
+    "solutions", "inc", "llc", "corp", "corporation", "ltd", "limited",
+    "engineer", "developer", "manager", "architect", "lead", "specialist",
+    "analyst", "consultant", "director", "designer", "officer", "executive",
+    "assistant", "intern", "associate", "senior", "junior", "principal",
+    "work", "employment", "history", "professional",
+}
+
+def _validate_candidate_name(name: str) -> float:
+    """Scores a candidate name string between 0.0 and 1.0. 0.0 means invalid."""
+    if not name:
+        return 0.0
+    clean = name.strip()
+    words = clean.split()
+    if len(words) < 2 or len(words) > 4:
+        return 0.0
+
+    lower_words = [w.lower().rstrip(".,;:") for w in words]
+    for w in lower_words:
+        if w in DISALLOWED_NAME_WORDS:
+            return 0.0
+        if not w.isalpha() and "-" not in w:
+            return 0.0
+
+    title_words = sum(1 for w in words if w[0].isupper())
+    score = 0.5 + (0.5 * (title_words / len(words)))
+    if len(words) == 2:
+        score += 0.1
+    return min(1.0, score)
+
 def _extract_name(text: str, email: Optional[str], phone: Optional[str]) -> Optional[str]:
-    """Extract name from personal_info section using spaCy PERSON entities,
-    falling back to the first non-contact line."""
+    """Extract name from personal_info section using spaCy PERSON entities with validation,
+    falling back to line-based heuristics."""
+    if not text:
+        return None
+
+    # Step 1: Check spaCy PERSON entities
     doc = _nlp(text)
+    best_candidate = None
+    best_score = 0.0
+
     for ent in doc.ents:
         if ent.label_ == "PERSON":
-            return ent.text.strip()
+            score = _validate_candidate_name(ent.text)
+            if score > best_score:
+                best_score = score
+                best_candidate = ent.text.strip()
 
-    # Fallback: first line that is not email/phone/url
-    for line in text.split("\n"):
-        stripped = line.strip()
-        if not stripped:
+    if best_candidate and best_score >= 0.5:
+        return best_candidate
+
+    # Step 2: Line-based candidate search
+    lines = [line.strip() for line in text.split("\n") if line.strip()]
+    for line in lines[:5]:
+        if email and email in line:
             continue
-        if email and email in stripped:
+        if phone and phone in line:
             continue
-        if phone and phone in stripped:
+        if re.search(r'https?://|www\.|@|linkedin|github', line, re.IGNORECASE):
             continue
-        if re.search(r'https?://|www\.|@|linkedin|github', stripped, re.IGNORECASE):
+        if re.search(r'^\+?\d[\d\s\-().]{5,}$', line):
             continue
-        if re.search(r'^\+?\d[\d\s\-().]{5,}$', stripped):
+
+        # If line contains delimiters like '|', take the first segment
+        candidate = re.split(r'[|•·,]', line)[0].strip()
+        score = _validate_candidate_name(candidate)
+        if score > 0.0:
+            return candidate
+
+    # Step 3: Fallback to first non-contact line
+    for line in lines:
+        if email and email in line:
             continue
-        # Likely a name line
-        return stripped
+        if phone and phone in line:
+            continue
+        if re.search(r'https?://|www\.|@|linkedin|github', line, re.IGNORECASE):
+            continue
+        if re.search(r'^\+?\d[\d\s\-().]{5,}$', line):
+            continue
+        # Avoid obvious section header words in fallback
+        lower_line = line.lower()
+        if any(h in lower_line for h in ["curriculum", "vitae", "resume", "experience", "education"]):
+            continue
+        return line
+
     return None
 
 

@@ -33,3 +33,31 @@ def test_unicode_email():
     entities = extract_entities({"personal_info": "rené.müller@example.com"})
     assert entities.email is not None
 
+def test_company_name_not_extracted_as_person():
+    sections = {"personal_info": "Google Technologies Inc\nJohn Smith\njohn@email.com"}
+    result = extract_entities(sections)
+    assert result.name == "John Smith"
+    assert result.name != "Google Technologies Inc"
+
+def test_section_heading_not_extracted_as_name():
+    sections = {"personal_info": "Experience\nJane Doe\njane@email.com"}
+    result = extract_entities(sections)
+    assert result.name == "Jane Doe"
+
+def test_resume_header_or_job_title_not_extracted_as_name():
+    sections1 = {"personal_info": "Curriculum Vitae\nJane Doe\njane@email.com"}
+    result1 = extract_entities(sections1)
+    assert result1.name == "Jane Doe"
+
+    sections2 = {"personal_info": "Senior Software Engineer\nJane Doe\njane@email.com"}
+    result2 = extract_entities(sections2)
+    assert result2.name == "Jane Doe"
+
+def test_prefers_name_from_first_lines():
+    sections = {
+        "personal_info": "Alice Johnson\nalice@email.com\n555-1234",
+        "experience": "Worked with Bob Smith at Acme Corp"
+    }
+    result = extract_entities(sections)
+    assert result.name == "Alice Johnson"
+
