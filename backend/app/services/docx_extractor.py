@@ -45,3 +45,4 @@ def extract_docx(path: Path) -> ExtractedText:
             "tables_count": len(doc.tables),
         },
     )
+

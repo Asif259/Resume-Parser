@@ -37,3 +37,4 @@ def test_extract_docx_with_tables(tmp_path):
 def test_extract_docx_nonexistent():
     with pytest.raises(FileNotFoundError):
         extract_docx(Path("missing_file.docx"))
+
