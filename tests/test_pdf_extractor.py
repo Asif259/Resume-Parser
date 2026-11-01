@@ -2,7 +2,31 @@ import fitz
 import pytest
 from pathlib import Path
 
-from app.services.pdf_extractor import extract_pdf, ExtractedText
+from app.services.pdf_extractor import extract_pdf, ExtractedText, evaluate_text_quality
+
+def test_evaluate_text_quality_good_text():
+    assert evaluate_text_quality("John Doe\nSoftware Engineer\nPython Java SQL React Node", page_count=1) is True
+
+def test_evaluate_text_quality_garbled():
+    assert evaluate_text_quality("##$$@@!!%%^^ &&**((__))++", page_count=1) is False
+
+def test_evaluate_text_quality_empty():
+    assert evaluate_text_quality("", page_count=1) is False
+
+def test_evaluate_text_quality_too_few_words():
+    assert evaluate_text_quality("abc", page_count=1) is False
+
+def test_digital_pdf_with_images_no_ocr(tmp_path):
+    """A valid PDF with real text should NOT trigger OCR."""
+    pdf_path = tmp_path / "valid_doc.pdf"
+    doc = fitz.open()
+    page = doc.new_page()
+    page.insert_text((50, 100), "John Doe\nSoftware Engineer at Google\nDeveloped scalable web applications in Python.")
+    doc.save(str(pdf_path))
+    doc.close()
+
+    result = extract_pdf(pdf_path)
+    assert result.method == "pdf_text"
 
 def test_extract_pdf_with_text(tmp_path, sample_pdf_bytes):
     pdf_path = tmp_path / "sample.pdf"

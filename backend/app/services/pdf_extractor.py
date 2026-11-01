@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from pathlib import Path
+import re
 from typing import Any
 import fitz  # PyMuPDF
 
@@ -63,6 +64,29 @@ def _extract_page_layout_aware(page: fitz.Page) -> tuple[str, str]:
     ordered_texts = [b[4].strip() for b in text_blocks if b[4].strip()]
     return "\n\n".join(ordered_texts), "single_column"
 
+def evaluate_text_quality(text: str, page_count: int) -> bool:
+    """Evaluates whether extracted text is sufficient quality or requires OCR fallback."""
+    if not text:
+        return False
+    clean = text.strip()
+    if not clean:
+        return False
+
+    effective_pages = max(page_count, 1)
+    if len(clean) / effective_pages < 30:
+        return False
+
+    words = [w for w in re.findall(r'[A-Za-z]+', clean) if len(w) >= 2]
+    if len(words) < 5:
+        return False
+
+    alpha_count = sum(1 for c in clean if c.isalpha())
+    total_non_ws = sum(1 for c in clean if not c.isspace())
+    if total_non_ws == 0 or (alpha_count / total_non_ws) < 0.45:
+        return False
+
+    return True
+
 def extract_pdf(path: Path) -> ExtractedText:
     """Extract text from a PDF document using PyMuPDF with layout awareness."""
     path = Path(path)
@@ -86,8 +110,8 @@ def extract_pdf(path: Path) -> ExtractedText:
     full_text = "\n\n".join(text_chunks).strip()
     layout = "multi_column" if has_multi_column else "single_column"
     
-    # Check if text is too sparse (scanned or image-only PDF)
-    method = "ocr_needed" if len(full_text) < 50 else "pdf_text"
+    # Evaluate text quality instead of arbitrary char length
+    method = "pdf_text" if evaluate_text_quality(full_text, pages_count) else "ocr_needed"
 
     return ExtractedText(
         text=full_text,
