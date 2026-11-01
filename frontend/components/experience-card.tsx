@@ -8,11 +8,12 @@ interface ExperienceCardProps {
 }
 
 export function ExperienceCard({ experience }: ExperienceCardProps) {
-  const { job_title, company, start_date, end_date, description } = experience;
+  const { job_title, company, start_date, end_date, is_current, description } = experience;
 
+  const displayEnd = is_current ? "Present" : end_date;
   const dateDisplay =
-    start_date || end_date
-      ? `${start_date || "Unknown"} — ${end_date || "Present"}`
+    start_date || displayEnd
+      ? `${start_date || "Unknown"} — ${displayEnd || "Present"}`
       : null;
 
   return (
@@ -34,6 +35,11 @@ export function ExperienceCard({ experience }: ExperienceCardProps) {
           <div className="flex items-center gap-1.5 text-xs text-gray-500 font-medium">
             <Calendar className="w-3.5 h-3.5" />
             <span>{dateDisplay}</span>
+            {is_current && (
+              <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                Current
+              </span>
+            )}
           </div>
         )}
       </div>

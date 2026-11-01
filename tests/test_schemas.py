@@ -81,3 +81,11 @@ def test_parse_response_model():
     assert res.id == "test-uuid"
     assert res.parsed_resume.personal_info.name == "Alice"
 
+def test_experience_is_current_field():
+    exp = Experience(job_title="Engineer", is_current=True)
+    assert exp.is_current is True
+
+def test_experience_is_current_default_none():
+    exp = Experience(job_title="Engineer")
+    assert exp.is_current is None
+

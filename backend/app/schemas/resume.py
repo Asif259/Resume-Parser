@@ -15,6 +15,7 @@ class Experience(BaseModel):
     company: Optional[str] = None
     start_date: Optional[str] = None
     end_date: Optional[str] = None
+    is_current: Optional[bool] = None
     description: list[str] = Field(default_factory=list)
 
 class Education(BaseModel):

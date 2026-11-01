@@ -71,8 +71,31 @@ def test_normalize_assembles_parsed_resume():
     assert len(resume.experience) == 1
     assert resume.experience[0].start_date == "2023-01"
     assert resume.experience[0].end_date is None
+    assert resume.experience[0].is_current is True
     assert resume.education[0].graduation_year == 2022
     assert len(resume.certifications) >= 1
     assert len(resume.projects) >= 1
     assert "English" in resume.languages[0]
+
+def test_normalize_experience_past_role_is_current_false():
+    grouped = GroupedInfo(
+        experience=[
+            {
+                "job_title": "Developer",
+                "company": "Old Corp",
+                "start_date": "2020",
+                "end_date": "2022",
+                "description": []
+            }
+        ],
+        education=[]
+    )
+    resume = normalize(
+        sections={},
+        entities=ExtractedEntities(),
+        grouped=grouped,
+        skills=[]
+    )
+    assert resume.experience[0].is_current is None
+    assert resume.experience[0].end_date == "2022"
 

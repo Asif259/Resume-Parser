@@ -144,12 +144,21 @@ def normalize(
     # 3. Work Experience
     experience_list: list[Experience] = []
     for exp in grouped.experience:
+        raw_end = exp.get("end_date")
+        is_current = None
+        if raw_end and re.match(r'(?i)^(present|current|now|ongoing)$', str(raw_end).strip()):
+            is_current = True
+            normalized_end = None
+        else:
+            normalized_end = normalize_date(raw_end)
+
         experience_list.append(
             Experience(
                 job_title=exp.get("job_title"),
                 company=exp.get("company"),
                 start_date=normalize_date(exp.get("start_date")),
-                end_date=normalize_date(exp.get("end_date")),
+                end_date=normalized_end,
+                is_current=is_current,
                 description=exp.get("description", []),
             )
         )
