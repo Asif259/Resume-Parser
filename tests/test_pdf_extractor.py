@@ -48,6 +48,34 @@ def test_extract_pdf_two_column_reading_order(tmp_path):
     assert "RIGHT_COLUMN_HEADER" in result.text
     assert result.method == "pdf_text"
 
+def test_two_column_layout_coherence(tmp_path):
+    pdf_path = tmp_path / "two_col_resume.pdf"
+    doc = fitz.open()
+    page = doc.new_page(width=600, height=800)
+    # Left column: Experience
+    page.insert_textbox(
+        fitz.Rect(50, 100, 280, 500),
+        "WORK EXPERIENCE\nSenior Software Engineer\nBuilt high throughput backend microservices.\nOptimized SQL queries."
+    )
+    # Right column: Skills
+    page.insert_textbox(
+        fitz.Rect(320, 100, 550, 500),
+        "TECHNICAL SKILLS\nPython\nFastAPI\nPostgreSQL\nDocker\nKubernetes"
+    )
+    doc.save(str(pdf_path))
+    doc.close()
+
+    result = extract_pdf(pdf_path)
+    assert result.metadata.get("layout") == "multi_column"
+    # Content of left column should stay intact
+    assert "Senior Software Engineer\nBuilt high throughput backend microservices." in result.text
+
+def test_layout_detection_single_column(tmp_path, sample_pdf_bytes):
+    pdf_path = tmp_path / "single_col.pdf"
+    pdf_path.write_bytes(sample_pdf_bytes)
+    result = extract_pdf(pdf_path)
+    assert result.metadata.get("layout") == "single_column"
+
 def test_extract_pdf_nonexistent():
     with pytest.raises(FileNotFoundError):
         extract_pdf(Path("nonexistent_resume.pdf"))
