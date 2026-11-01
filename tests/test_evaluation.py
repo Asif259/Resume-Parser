@@ -5,6 +5,8 @@ from app.schemas.resume import ParsedResume, PersonalInfo, Experience, Education
 from tests.evaluation.ground_truth import GroundTruth, load_ground_truth, load_ground_truth_dir
 from tests.evaluation.comparator import compare_resumes, FieldComparison
 from tests.evaluation.metrics import compute_metrics, EvaluationMetrics
+from tests.evaluation.runner import run_evaluation, EvaluationReport
+from tests.evaluation.report import format_report
 
 def test_ground_truth_loads_valid_json(tmp_path: Path):
     gt_file = tmp_path / "sample.json"
@@ -101,3 +103,19 @@ def test_compute_metrics_partial():
     assert 0.0 < metrics.f1 < 1.0
     assert metrics.exact_matches == 1
     assert metrics.total_fields == 2
+
+def test_evaluation_runner_produces_report():
+    fixtures_dir = Path(__file__).resolve().parent / "fixtures" / "resumes"
+    gt_dir = Path(__file__).resolve().parent / "fixtures" / "ground_truth"
+    report = run_evaluation(fixtures_dir=fixtures_dir, ground_truth_dir=gt_dir)
+    assert isinstance(report, EvaluationReport)
+    assert len(report.per_resume) == 5
+    assert 0.0 <= report.overall.f1 <= 1.0
+    formatted = format_report(report)
+    assert "EVALUATION REPORT" in formatted
+
+def test_baseline_email_accuracy():
+    fixtures_dir = Path(__file__).resolve().parent / "fixtures" / "resumes"
+    gt_dir = Path(__file__).resolve().parent / "fixtures" / "ground_truth"
+    report = run_evaluation(fixtures_dir=fixtures_dir, ground_truth_dir=gt_dir)
+    assert report.per_field.get("personal_info.email", 0.0) >= 0.8

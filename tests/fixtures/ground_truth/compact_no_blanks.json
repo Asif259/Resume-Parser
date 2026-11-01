@@ -1,0 +1,45 @@
+{
+  "resume_id": "compact_no_blanks",
+  "source_file": "compact_no_blanks.pdf",
+  "expected": {
+    "personal_info": {
+      "name": "Bob Williams",
+      "email": "bob.williams@email.com",
+      "phone": "+1 555 345 6789",
+      "location": "Chicago, USA"
+    },
+    "professional_summary": "Frontend Engineer focused on modern React and TypeScript.",
+    "skills": [
+      "React",
+      "TypeScript",
+      "Next.js",
+      "HTML5",
+      "CSS3",
+      "Tailwind CSS"
+    ],
+    "experience": [
+      {
+        "job_title": "Lead Frontend Developer",
+        "company": "NextGen Media",
+        "start_date": "2022-03",
+        "end_date": null,
+        "is_current": true
+      },
+      {
+        "job_title": "Frontend Developer",
+        "company": "WebStudio",
+        "start_date": "2020-01",
+        "end_date": "2022-02",
+        "is_current": null
+      }
+    ],
+    "education": [
+      {
+        "degree": "Bachelor of Science in Information Technology",
+        "institution": "University of Illinois",
+        "graduation_year": 2019
+      }
+    ],
+    "raw_text": "Bob Williams\nbob.williams@email.com | +1 555 345 6789 | Chicago, USA\nProfessional Summary\nFrontend Engineer focused on modern React and TypeScript.\nWork Experience\nLead Frontend Developer | NextGen Media\nMarch 2022 - Present\n- Built React components\n- Mentored junior devs\nFrontend Developer | WebStudio\nJanuary 2020 - February 2022\n- Built client websites using TypeScript and CSS\nEducation\nBachelor of Science in Information Technology, University of Illinois, 2019\nSkills\nReact, TypeScript, Next.js, HTML5, CSS3, Tailwind CSS\n"
+  }
+}

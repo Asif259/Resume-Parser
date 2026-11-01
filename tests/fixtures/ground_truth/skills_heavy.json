@@ -1,0 +1,51 @@
+{
+  "resume_id": "skills_heavy",
+  "source_file": "skills_heavy.pdf",
+  "expected": {
+    "personal_info": {
+      "name": "Carol Martinez",
+      "email": "carol.m@datahub.io",
+      "phone": "+1 555 987 6543",
+      "location": "Austin, USA"
+    },
+    "skills": [
+      "Python",
+      "Go",
+      "JavaScript",
+      "TypeScript",
+      "React",
+      "Node.js",
+      "Docker",
+      "Kubernetes",
+      "AWS",
+      "GCP",
+      "Azure",
+      "PostgreSQL",
+      "MongoDB",
+      "Redis",
+      "GraphQL",
+      "Linux",
+      "Git",
+      "Jenkins",
+      "Terraform",
+      "Kafka"
+    ],
+    "experience": [
+      {
+        "job_title": "DevOps Engineer",
+        "company": "DataFlow Systems",
+        "start_date": "2021",
+        "end_date": null,
+        "is_current": true
+      }
+    ],
+    "education": [
+      {
+        "degree": "Bachelor of Science in Computer Engineering",
+        "institution": "UT Austin",
+        "graduation_year": 2020
+      }
+    ],
+    "raw_text": "Carol Martinez\ncarol.m@datahub.io | +1 555 987 6543 | Austin, USA\n\nProfessional Summary\nFull-stack and DevOps engineer with experience in cloud infrastructure and data pipelines.\n\nWork Experience\nDevOps Engineer, DataFlow Systems\n2021 - Present\n- Managed Kubernetes clusters, Terraform infrastructure, and Docker deployments\n\nEducation\nBachelor of Science in Computer Engineering, UT Austin, 2020\n\nSkills\nPython, Go, JavaScript, TypeScript, React, Node.js, Docker, Kubernetes, AWS, GCP, Azure, PostgreSQL, MongoDB, Redis, GraphQL, Linux, Git, Jenkins, Terraform, Kafka"
+  }
+}

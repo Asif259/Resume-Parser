@@ -1,0 +1,42 @@
+{
+  "resume_id": "table_resume",
+  "source_file": "table_resume.docx",
+  "expected": {
+    "personal_info": {
+      "name": "Eva Green",
+      "email": "eva.green@techcorp.com",
+      "phone": "+1 555 678 9012",
+      "location": "Seattle, USA",
+      "github": "https://github.com/evagreen"
+    },
+    "professional_summary": "Full Stack Developer with 4 years building scalable web services.",
+    "skills": [
+      "JavaScript",
+      "TypeScript",
+      "React",
+      "HTML5",
+      "CSS3",
+      "Node.js",
+      "Express",
+      "PostgreSQL",
+      "MongoDB",
+      "Docker"
+    ],
+    "experience": [
+      {
+        "job_title": "Full Stack Developer",
+        "company": "TechCorp",
+        "start_date": "2021-02",
+        "end_date": null,
+        "is_current": true
+      }
+    ],
+    "education": [
+      {
+        "degree": "Bachelor of Science in Software Engineering",
+        "institution": "University of Washington",
+        "graduation_year": 2020
+      }
+    ]
+  }
+}

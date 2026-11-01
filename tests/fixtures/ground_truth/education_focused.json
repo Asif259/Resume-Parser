@@ -1,0 +1,51 @@
+{
+  "resume_id": "education_focused",
+  "source_file": "education_focused.docx",
+  "expected": {
+    "personal_info": {
+      "name": "David Chen",
+      "email": "david.chen@mit.edu",
+      "phone": "+1 555 456 7890",
+      "location": "Boston, USA"
+    },
+    "professional_summary": "Machine learning researcher and software engineer.",
+    "skills": [
+      "Python",
+      "PyTorch",
+      "TensorFlow",
+      "Scikit-learn",
+      "Pandas",
+      "NumPy",
+      "C++",
+      "Git"
+    ],
+    "experience": [
+      {
+        "job_title": "Research Assistant",
+        "company": "AI Lab",
+        "start_date": "2021-09",
+        "end_date": "2023-05"
+      }
+    ],
+    "education": [
+      {
+        "degree": "PhD in Artificial Intelligence",
+        "institution": "MIT",
+        "graduation_year": 2024
+      }
+    ],
+    "certifications": [
+      {
+        "name": "Deep Learning Specialization",
+        "issuer": "DeepLearning.AI",
+        "date": "2020"
+      }
+    ],
+    "projects": [
+      {
+        "name": "Transformer-Parser",
+        "description": "Neural dependency parser built in PyTorch."
+      }
+    ]
+  }
+}

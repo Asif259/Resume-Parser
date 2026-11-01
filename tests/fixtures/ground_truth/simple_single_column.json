@@ -1,0 +1,67 @@
+{
+  "resume_id": "simple_single_column",
+  "source_file": "simple_single_column.pdf",
+  "expected": {
+    "personal_info": {
+      "name": "Alice Johnson",
+      "email": "alice.johnson@example.com",
+      "phone": "+1 555 234 5678",
+      "location": "San Francisco, USA",
+      "linkedin": "https://linkedin.com/in/alicejohnson",
+      "github": "https://github.com/alicej"
+    },
+    "professional_summary": "Experienced Backend Developer specializing in Python, FastAPI, and PostgreSQL with 5 years in cloud systems.",
+    "skills": [
+      "Python",
+      "FastAPI",
+      "Django",
+      "PostgreSQL",
+      "Docker",
+      "Git",
+      "Linux"
+    ],
+    "experience": [
+      {
+        "job_title": "Senior Backend Engineer",
+        "company": "CloudCorp",
+        "start_date": "2021-01",
+        "end_date": null,
+        "is_current": true,
+        "description": [
+          "Architected distributed microservices in Python and FastAPI",
+          "Optimized PostgreSQL database queries cutting latency by 40%"
+        ]
+      },
+      {
+        "job_title": "Software Engineer",
+        "company": "TechSolutions",
+        "start_date": "2018-06",
+        "end_date": "2020-12",
+        "is_current": null,
+        "description": [
+          "Developed RESTful APIs using Python and Django",
+          "Maintained CI/CD pipelines with Docker"
+        ]
+      }
+    ],
+    "education": [
+      {
+        "degree": "Master of Science in Computer Science",
+        "institution": "Stanford University",
+        "graduation_year": 2018
+      }
+    ],
+    "certifications": [
+      {
+        "name": "AWS Certified Solutions Architect",
+        "issuer": "Amazon",
+        "date": "2022"
+      }
+    ],
+    "languages": [
+      "English",
+      "French"
+    ],
+    "raw_text": "Alice Johnson\nalice.johnson@example.com | +1 555 234 5678 | San Francisco, USA\nhttps://linkedin.com/in/alicejohnson | https://github.com/alicej\n\nProfessional Summary\nExperienced Backend Developer specializing in Python, FastAPI, and PostgreSQL with 5 years in cloud systems.\n\nWork Experience\nSenior Backend Engineer, CloudCorp\nJanuary 2021 - Present\n- Architected distributed microservices in Python and FastAPI\n- Optimized PostgreSQL database queries cutting latency by 40%\n\nSoftware Engineer, TechSolutions\nJune 2018 - December 2020\n- Developed RESTful APIs using Python and Django\n- Maintained CI/CD pipelines with Docker\n\nEducation\nMaster of Science in Computer Science, Stanford University, 2018\n\nSkills\nPython, FastAPI, Django, PostgreSQL, Docker, Git, Linux\n\nCertifications\nAWS Certified Solutions Architect (Amazon, 2022)\n\nLanguages\nEnglish, French"
+  }
+}
