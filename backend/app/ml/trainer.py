@@ -69,7 +69,7 @@ def train_ner_model(
         per_device_eval_batch_size=batch_size,
         num_train_epochs=num_epochs,
         weight_decay=WEIGHT_DECAY,
-        warmup_ratio=WARMUP_RATIO,
+        warmup_steps=5,
         load_best_model_at_end=True,
         metric_for_best_model="f1",
         greater_is_better=True,
@@ -106,3 +106,4 @@ def train_ner_model(
         json.dump(summary, f, indent=2)
 
     return summary
+

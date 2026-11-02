@@ -32,3 +32,4 @@ def compute_metrics(eval_pred: Any, id2label: dict[int, str] = ID2LABEL) -> dict
 def get_detailed_report(true_labels: list[list[str]], true_predictions: list[list[str]]) -> str:
     """Returns detailed entity-level classification report from seqeval."""
     return classification_report(true_labels, true_predictions, zero_division=0)
+

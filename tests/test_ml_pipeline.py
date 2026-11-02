@@ -91,3 +91,20 @@ def test_compute_metrics():
     assert metrics["f1"] == 1.0
     assert metrics["precision"] == 1.0
     assert metrics["recall"] == 1.0
+
+def test_predict_entities_with_model():
+    from app.ml.predict import predict_entities
+    assert predict_entities("") == []
+    assert predict_entities("   ") == []
+
+    text = "Alice Johnson is a Software Engineer at CloudCorp in San Francisco."
+    entities = predict_entities(text, min_confidence=0.1)
+    assert isinstance(entities, list)
+    for ent in entities:
+        assert "entity" in ent
+        assert "label" in ent
+        assert "confidence" in ent
+        assert "start" in ent
+        assert "end" in ent
+        assert ent["start"] <= ent["end"]
+

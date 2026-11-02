@@ -72,3 +72,4 @@ def tokenize_and_align_batch(
 
     tokenized_inputs["labels"] = all_aligned_labels
     return tokenized_inputs
+

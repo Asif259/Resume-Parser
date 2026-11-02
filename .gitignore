@@ -13,4 +13,8 @@ backend/uploads/*
 node_modules/
 .next/
 dist/
+models/**/*.safetensors
+models/**/checkpoints/
+models/**/checkpoint-*/
+
 
