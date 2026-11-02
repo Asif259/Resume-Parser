@@ -1,0 +1,48 @@
+{
+  "resume_id": "docx_plain_security_eng",
+  "source_file": "docx_plain_security_eng.docx",
+  "expected": {
+    "personal_info": {
+      "name": "Morgan Taylor",
+      "email": "morgan.taylor@secops.io",
+      "phone": "+1 555 456 0123",
+      "location": "San Diego, USA"
+    },
+    "professional_summary": "Information Security Analyst specializing in threat detection, SIEM, and vulnerability analysis.",
+    "skills": [
+      "Cybersecurity",
+      "SIEM",
+      "Splunk",
+      "Wireshark",
+      "Penetration Testing",
+      "IAM",
+      "OWASP",
+      "Linux",
+      "Python",
+      "Git"
+    ],
+    "experience": [
+      {
+        "job_title": "Information Security Analyst",
+        "company": "CyberGuard Systems",
+        "start_date": "2021-05",
+        "end_date": null,
+        "is_current": true
+      },
+      {
+        "job_title": "Junior Security Analyst",
+        "company": "SecureNet",
+        "start_date": "2019-02",
+        "end_date": "2021-04",
+        "is_current": null
+      }
+    ],
+    "education": [
+      {
+        "degree": "Bachelor of Science in Cybersecurity",
+        "institution": "San Diego State University",
+        "graduation_year": 2019
+      }
+    ]
+  }
+}

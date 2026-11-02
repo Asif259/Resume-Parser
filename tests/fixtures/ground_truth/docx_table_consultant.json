@@ -1,0 +1,48 @@
+{
+  "resume_id": "docx_table_consultant",
+  "source_file": "docx_table_consultant.docx",
+  "expected": {
+    "personal_info": {
+      "name": "Amanda Hayes",
+      "email": "amanda.hayes@consulting.com",
+      "phone": "+1 555 123 7890",
+      "location": "Atlanta, USA"
+    },
+    "professional_summary": "Senior IT Consultant delivering digital transformations and cloud architecture solutions.",
+    "skills": [
+      "Python",
+      "SQL",
+      "AWS",
+      "Azure",
+      "Tableau",
+      "Agile",
+      "Scrum",
+      "Jira",
+      "Git",
+      "Linux"
+    ],
+    "experience": [
+      {
+        "job_title": "Senior Technology Consultant",
+        "company": "Global Advisory Partners",
+        "start_date": "2020-07",
+        "end_date": null,
+        "is_current": true
+      },
+      {
+        "job_title": "Technology Analyst",
+        "company": "Beacon Strategy",
+        "start_date": "2017-06",
+        "end_date": "2020-06",
+        "is_current": null
+      }
+    ],
+    "education": [
+      {
+        "degree": "Bachelor of Science in Information Systems",
+        "institution": "Georgia Tech",
+        "graduation_year": 2017
+      }
+    ]
+  }
+}

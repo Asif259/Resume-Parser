@@ -1,0 +1,52 @@
+{
+  "resume_id": "intl_brazil_saopaulo",
+  "source_file": "intl_brazil_saopaulo.docx",
+  "expected": {
+    "personal_info": {
+      "name": "Rodrigo Silva",
+      "email": "rodrigo.silva@techpaulista.com.br",
+      "phone": "+55 11 98765 4321",
+      "location": "Sao Paulo, Brazil"
+    },
+    "professional_summary": "Backend Developer specializing in cloud-native microservices and distributed databases.",
+    "skills": [
+      "Java",
+      "Spring",
+      "Python",
+      "Docker",
+      "Kubernetes",
+      "PostgreSQL",
+      "Redis",
+      "AWS",
+      "Git"
+    ],
+    "languages": [
+      "Portuguese",
+      "English",
+      "Spanish"
+    ],
+    "experience": [
+      {
+        "job_title": "Senior Backend Developer",
+        "company": "NuvemTech Solucoes",
+        "start_date": "2021-05",
+        "end_date": null,
+        "is_current": true
+      },
+      {
+        "job_title": "Backend Developer",
+        "company": "Paulista Software",
+        "start_date": "2019-01",
+        "end_date": "2021-04",
+        "is_current": null
+      }
+    ],
+    "education": [
+      {
+        "degree": "Bachelor of Science in Computer Science",
+        "institution": "Universidade de Sao Paulo",
+        "graduation_year": 2018
+      }
+    ]
+  }
+}

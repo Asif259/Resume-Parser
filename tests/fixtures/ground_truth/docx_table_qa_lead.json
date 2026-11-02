@@ -1,0 +1,49 @@
+{
+  "resume_id": "docx_table_qa_lead",
+  "source_file": "docx_table_qa_lead.docx",
+  "expected": {
+    "personal_info": {
+      "name": "Benjamin Cooper",
+      "email": "ben.cooper@qalead.io",
+      "phone": "+1 555 234 8901",
+      "location": "Dallas, USA"
+    },
+    "professional_summary": "QA Automation Lead specializing in automated testing frameworks for web and API services.",
+    "skills": [
+      "Selenium",
+      "Cypress",
+      "Playwright",
+      "Python",
+      "Java",
+      "Jest",
+      "Postman",
+      "CI/CD",
+      "Git",
+      "Linux",
+      "Docker"
+    ],
+    "experience": [
+      {
+        "job_title": "QA Automation Lead",
+        "company": "Testify Systems",
+        "start_date": "2021-01",
+        "end_date": null,
+        "is_current": true
+      },
+      {
+        "job_title": "QA Engineer",
+        "company": "QualiTech Labs",
+        "start_date": "2018-03",
+        "end_date": "2020-12",
+        "is_current": null
+      }
+    ],
+    "education": [
+      {
+        "degree": "Bachelor of Science in Computer Engineering",
+        "institution": "UT Dallas",
+        "graduation_year": 2018
+      }
+    ]
+  }
+}

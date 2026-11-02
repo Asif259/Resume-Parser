@@ -1,0 +1,53 @@
+{
+  "resume_id": "intl_uk_london",
+  "source_file": "intl_uk_london.pdf",
+  "expected": {
+    "personal_info": {
+      "name": "Fiona MacLeod",
+      "email": "fiona.macleod@londontech.co.uk",
+      "phone": "+44 20 7946 0958",
+      "location": "London, United Kingdom"
+    },
+    "professional_summary": "Lead Data Engineer building large-scale streaming pipelines and modern data platforms.",
+    "skills": [
+      "Python",
+      "SQL",
+      "Kafka",
+      "Snowflake",
+      "dbt",
+      "Spark",
+      "AWS",
+      "Docker",
+      "Git",
+      "Linux"
+    ],
+    "languages": [
+      "English",
+      "French"
+    ],
+    "experience": [
+      {
+        "job_title": "Lead Data Engineer",
+        "company": "FinTech London",
+        "start_date": "2021-02",
+        "end_date": null,
+        "is_current": true
+      },
+      {
+        "job_title": "Data Engineer",
+        "company": "Thames Analytics",
+        "start_date": "2018-09",
+        "end_date": "2021-01",
+        "is_current": null
+      }
+    ],
+    "education": [
+      {
+        "degree": "Master of Science in Computing",
+        "institution": "University of Cambridge",
+        "graduation_year": 2018
+      }
+    ],
+    "raw_text": "Fiona MacLeod\nfiona.macleod@londontech.co.uk | +44 20 7946 0958 | London, United Kingdom\n\nProfessional Summary\nLead Data Engineer building large-scale streaming pipelines and modern data platforms.\n\nWork Experience\nLead Data Engineer, FinTech London\nFebruary 2021 - Present\n- Built real-time Kafka streaming architectures\n\nData Engineer, Thames Analytics\nSeptember 2018 - January 2021\n- Managed Snowflake data warehouse and dbt transformations\n\nEducation\nMaster of Science in Computing, University of Cambridge, 2018\n\nSkills\nPython, SQL, Kafka, Snowflake, dbt, Spark, AWS, Docker, Git, Linux\n\nLanguages\nEnglish, French"
+  }
+}

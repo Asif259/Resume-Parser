@@ -1,0 +1,47 @@
+{
+  "resume_id": "docx_plain_sysadmin",
+  "source_file": "docx_plain_sysadmin.docx",
+  "expected": {
+    "personal_info": {
+      "name": "Gregory Foster",
+      "email": "greg.foster@sysops.org",
+      "phone": "+1 555 345 9012",
+      "location": "Phoenix, USA"
+    },
+    "professional_summary": "Linux Systems Administrator with 8 years managing high-availability server clusters.",
+    "skills": [
+      "Linux",
+      "Bash",
+      "Ansible",
+      "VMware",
+      "DNS",
+      "NGINX",
+      "Apache",
+      "Python",
+      "Git"
+    ],
+    "experience": [
+      {
+        "job_title": "Senior Systems Administrator",
+        "company": "CoreHost Networks",
+        "start_date": "2019-11",
+        "end_date": null,
+        "is_current": true
+      },
+      {
+        "job_title": "Systems Administrator",
+        "company": "NetSolutions",
+        "start_date": "2016-04",
+        "end_date": "2019-10",
+        "is_current": null
+      }
+    ],
+    "education": [
+      {
+        "degree": "Bachelor of Science in Information Technology",
+        "institution": "Arizona State University",
+        "graduation_year": 2016
+      }
+    ]
+  }
+}

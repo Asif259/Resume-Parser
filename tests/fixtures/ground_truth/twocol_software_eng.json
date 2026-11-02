@@ -1,0 +1,51 @@
+{
+  "resume_id": "twocol_software_eng",
+  "source_file": "twocol_software_eng.pdf",
+  "expected": {
+    "personal_info": {
+      "name": "Alex Rivera",
+      "email": "alex.rivera@fullstack.dev",
+      "phone": "+1 555 444 5566",
+      "location": "Denver, USA"
+    },
+    "professional_summary": "Full Stack Engineer with 5 years experience in TypeScript, React, and microservices.",
+    "skills": [
+      "TypeScript",
+      "React",
+      "Node.js",
+      "Next.js",
+      "PostgreSQL",
+      "Docker",
+      "Redis",
+      "Git",
+      "Linux"
+    ],
+    "languages": [
+      "English",
+      "Spanish"
+    ],
+    "experience": [
+      {
+        "job_title": "Senior Full Stack Developer",
+        "company": "Apex Solutions",
+        "start_date": "2022-01",
+        "end_date": null,
+        "is_current": true
+      },
+      {
+        "job_title": "Full Stack Developer",
+        "company": "Digital Forge",
+        "start_date": "2019-06",
+        "end_date": "2021-12",
+        "is_current": null
+      }
+    ],
+    "education": [
+      {
+        "degree": "Bachelor of Science in Computer Science",
+        "institution": "University of Colorado",
+        "graduation_year": 2019
+      }
+    ]
+  }
+}

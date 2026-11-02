@@ -1,0 +1,45 @@
+{
+  "resume_id": "twocol_product_mgr",
+  "source_file": "twocol_product_mgr.pdf",
+  "expected": {
+    "personal_info": {
+      "name": "Rachel Kim",
+      "email": "rachel.kim@productlead.com",
+      "phone": "+1 555 555 6677",
+      "location": "Chicago, USA"
+    },
+    "professional_summary": "Technical Product Manager with background in software development and agile roadmapping.",
+    "skills": [
+      "Agile",
+      "Scrum",
+      "Jira",
+      "SQL",
+      "Python",
+      "Figma",
+      "Git"
+    ],
+    "experience": [
+      {
+        "job_title": "Lead Product Manager",
+        "company": "InnovateX",
+        "start_date": "2021-04",
+        "end_date": null,
+        "is_current": true
+      },
+      {
+        "job_title": "Technical Product Manager",
+        "company": "SprintLabs",
+        "start_date": "2018-02",
+        "end_date": "2021-03",
+        "is_current": null
+      }
+    ],
+    "education": [
+      {
+        "degree": "Master of Business Administration",
+        "institution": "Northwestern University",
+        "graduation_year": 2020
+      }
+    ]
+  }
+}

@@ -109,7 +109,7 @@ def test_evaluation_runner_produces_report():
     gt_dir = Path(__file__).resolve().parent / "fixtures" / "ground_truth"
     report = run_evaluation(fixtures_dir=fixtures_dir, ground_truth_dir=gt_dir)
     assert isinstance(report, EvaluationReport)
-    assert len(report.per_resume) == 5
+    assert len(report.per_resume) == 25
     assert 0.0 <= report.overall.f1 <= 1.0
     formatted = format_report(report)
     assert "EVALUATION REPORT" in formatted
@@ -119,3 +119,26 @@ def test_baseline_email_accuracy():
     gt_dir = Path(__file__).resolve().parent / "fixtures" / "ground_truth"
     report = run_evaluation(fixtures_dir=fixtures_dir, ground_truth_dir=gt_dir)
     assert report.per_field.get("personal_info.email", 0.0) >= 0.8
+
+def test_dataset_splits_and_bio_integrity():
+    fixtures_dir = Path(__file__).resolve().parent / "fixtures"
+    splits_file = fixtures_dir / "splits.json"
+    assert splits_file.exists()
+    splits = json.loads(splits_file.read_text(encoding="utf-8"))
+    assert len(splits["train"]) == 15
+    assert len(splits["val"]) == 5
+    assert len(splits["test"]) == 5
+    assert len(set(splits["train"]) & set(splits["val"])) == 0
+    assert len(set(splits["train"]) & set(splits["test"])) == 0
+    assert len(set(splits["val"]) & set(splits["test"])) == 0
+
+    all_ids = splits["train"] + splits["val"] + splits["test"]
+    assert len(all_ids) == 25
+    for rid in all_ids:
+        gt_file = fixtures_dir / "ground_truth" / f"{rid}.json"
+        bio_file = fixtures_dir / "bio" / f"{rid}.bio"
+        assert gt_file.exists(), f"Missing ground truth for {rid}"
+        assert bio_file.exists(), f"Missing BIO file for {rid}"
+        bio_lines = bio_file.read_text(encoding="utf-8").strip().splitlines()
+        assert len(bio_lines) > 0, f"Empty BIO file for {rid}"
+

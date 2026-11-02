@@ -1,0 +1,52 @@
+{
+  "resume_id": "multipage_academic_researcher",
+  "source_file": "multipage_academic_researcher.pdf",
+  "expected": {
+    "personal_info": {
+      "name": "Catherine Thorne",
+      "email": "c.thorne@researchlab.edu",
+      "phone": "+1 555 999 0011",
+      "location": "Cambridge, USA"
+    },
+    "professional_summary": "Postdoctoral Research Scientist in Artificial Intelligence and Natural Language Processing.",
+    "skills": [
+      "Python",
+      "PyTorch",
+      "TensorFlow",
+      "Scikit-learn",
+      "Linux",
+      "Git",
+      "Pandas",
+      "NumPy"
+    ],
+    "experience": [
+      {
+        "job_title": "Postdoctoral AI Researcher",
+        "company": "MIT AI Laboratory",
+        "start_date": "2022-09",
+        "end_date": null,
+        "is_current": true
+      },
+      {
+        "job_title": "Graduate Research Fellow",
+        "company": "Stanford NLP Group",
+        "start_date": "2018-09",
+        "end_date": "2022-08",
+        "is_current": null
+      }
+    ],
+    "education": [
+      {
+        "degree": "PhD in Computer Science",
+        "institution": "Stanford University",
+        "graduation_year": 2022
+      }
+    ],
+    "projects": [
+      {
+        "name": "Neural-Summarizer",
+        "description": "Open-source neural document summarization toolkit in PyTorch."
+      }
+    ]
+  }
+}

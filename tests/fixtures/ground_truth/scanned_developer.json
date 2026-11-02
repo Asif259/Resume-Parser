@@ -1,0 +1,39 @@
+{
+  "resume_id": "scanned_developer",
+  "source_file": "scanned_developer.pdf",
+  "expected": {
+    "personal_info": {
+      "name": "Lucas Vance",
+      "email": "lucas.vance@embeddedtech.org",
+      "phone": "+1 555 678 2345",
+      "location": "Detroit, USA"
+    },
+    "professional_summary": "Embedded Systems Developer specializing in real-time firmware and RTOS device drivers.",
+    "skills": [
+      "C",
+      "C++",
+      "Linux",
+      "Git",
+      "RTOS",
+      "ARM",
+      "Python"
+    ],
+    "experience": [
+      {
+        "job_title": "Embedded Software Engineer",
+        "company": "AutoDrive Systems",
+        "start_date": "2020-09",
+        "end_date": null,
+        "is_current": true
+      }
+    ],
+    "education": [
+      {
+        "degree": "Bachelor of Science in Computer Engineering",
+        "institution": "University of Michigan",
+        "graduation_year": 2020
+      }
+    ],
+    "raw_text": "Lucas Vance\nlucas.vance@embeddedtech.org | +1 555 678 2345 | Detroit, USA\n\nProfessional Summary\nEmbedded Systems Developer specializing in real-time firmware and RTOS device drivers.\n\nWork Experience\nEmbedded Software Engineer, AutoDrive Systems\nSeptember 2020 - Present\n- Developed firmware drivers in C and C++ for automotive controllers\n\nEducation\nBachelor of Science in Computer Engineering, University of Michigan, 2020\n\nSkills\nC, C++, Linux, Git, RTOS, ARM, Python"
+  }
+}

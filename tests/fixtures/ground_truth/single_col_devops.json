@@ -1,0 +1,50 @@
+{
+  "resume_id": "single_col_devops",
+  "source_file": "single_col_devops.pdf",
+  "expected": {
+    "personal_info": {
+      "name": "Marcus Vance",
+      "email": "marcus.vance@cloudinfra.net",
+      "phone": "+1 555 222 3344",
+      "location": "Seattle, USA"
+    },
+    "professional_summary": "Site Reliability Engineer specializing in Kubernetes, Terraform, and cloud observability.",
+    "skills": [
+      "Kubernetes",
+      "Docker",
+      "Terraform",
+      "Prometheus",
+      "Grafana",
+      "Ansible",
+      "AWS",
+      "Linux",
+      "Python",
+      "Git",
+      "Jenkins"
+    ],
+    "experience": [
+      {
+        "job_title": "Senior SRE",
+        "company": "CloudMatrix",
+        "start_date": "2020-05",
+        "end_date": null,
+        "is_current": true
+      },
+      {
+        "job_title": "DevOps Engineer",
+        "company": "InfraScale",
+        "start_date": "2017-09",
+        "end_date": "2020-04",
+        "is_current": null
+      }
+    ],
+    "education": [
+      {
+        "degree": "Bachelor of Science in Computer Science",
+        "institution": "University of Washington",
+        "graduation_year": 2017
+      }
+    ],
+    "raw_text": "Marcus Vance\nmarcus.vance@cloudinfra.net | +1 555 222 3344 | Seattle, USA\n\nProfessional Summary\nSite Reliability Engineer specializing in Kubernetes, Terraform, and cloud observability.\n\nWork Experience\nSenior SRE, CloudMatrix\nMay 2020 - Present\n- Architected multi-region Kubernetes clusters with Terraform\n- Built monitoring dashboards using Prometheus and Grafana\n\nDevOps Engineer, InfraScale\nSeptember 2017 - April 2020\n- Automated deployment pipelines with Ansible and Jenkins\n- Managed Linux servers on AWS\n\nEducation\nBachelor of Science in Computer Science, University of Washington, 2017\n\nSkills\nKubernetes, Docker, Terraform, Prometheus, Grafana, Ansible, AWS, Linux, Python, Git, Jenkins"
+  }
+}

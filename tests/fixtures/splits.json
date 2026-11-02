@@ -1,0 +1,33 @@
+{
+  "train": [
+    "simple_single_column",
+    "compact_no_blanks",
+    "skills_heavy",
+    "education_focused",
+    "table_resume",
+    "single_col_datascience",
+    "single_col_devops",
+    "twocol_software_eng",
+    "twocol_product_mgr",
+    "multipage_senior_architect",
+    "docx_table_consultant",
+    "docx_plain_sysadmin",
+    "scanned_analyst",
+    "intl_germany_berlin",
+    "intl_japan_tokyo"
+  ],
+  "val": [
+    "single_col_mobile",
+    "twocol_data_analyst",
+    "multipage_academic_researcher",
+    "docx_plain_security_eng",
+    "intl_uk_london"
+  ],
+  "test": [
+    "twocol_cloud_architect",
+    "multipage_engineering_manager",
+    "docx_table_qa_lead",
+    "scanned_developer",
+    "intl_brazil_saopaulo"
+  ]
+}

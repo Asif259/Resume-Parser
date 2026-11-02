@@ -1,0 +1,47 @@
+{
+  "resume_id": "twocol_data_analyst",
+  "source_file": "twocol_data_analyst.pdf",
+  "expected": {
+    "personal_info": {
+      "name": "James O'Connor",
+      "email": "james.oconnor@analytics.org",
+      "phone": "+1 555 666 7788",
+      "location": "Boston, USA"
+    },
+    "professional_summary": "Senior Data Analyst delivering actionable business intelligence and dashboards.",
+    "skills": [
+      "SQL",
+      "Python",
+      "Tableau",
+      "Power BI",
+      "Excel",
+      "Snowflake",
+      "dbt",
+      "Looker",
+      "Git"
+    ],
+    "experience": [
+      {
+        "job_title": "Senior Data Analyst",
+        "company": "MetricFlow",
+        "start_date": "2021-10",
+        "end_date": null,
+        "is_current": true
+      },
+      {
+        "job_title": "Business Data Analyst",
+        "company": "InsightCorp",
+        "start_date": "2019-05",
+        "end_date": "2021-09",
+        "is_current": null
+      }
+    ],
+    "education": [
+      {
+        "degree": "Bachelor of Science in Statistics",
+        "institution": "Boston University",
+        "graduation_year": 2019
+      }
+    ]
+  }
+}

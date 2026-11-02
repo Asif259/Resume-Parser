@@ -1,0 +1,48 @@
+{
+  "resume_id": "multipage_engineering_manager",
+  "source_file": "multipage_engineering_manager.pdf",
+  "expected": {
+    "personal_info": {
+      "name": "Daniel Roberts",
+      "email": "daniel.roberts@execlead.com",
+      "phone": "+1 555 012 3456",
+      "location": "San Francisco, USA"
+    },
+    "professional_summary": "Engineering Director with 14 years experience scaling high-growth engineering organizations.",
+    "skills": [
+      "Go",
+      "Python",
+      "Kubernetes",
+      "Docker",
+      "PostgreSQL",
+      "AWS",
+      "Agile",
+      "Jira",
+      "Git",
+      "Linux"
+    ],
+    "experience": [
+      {
+        "job_title": "Director of Engineering",
+        "company": "ScaleFast Inc",
+        "start_date": "2021-03",
+        "end_date": null,
+        "is_current": true
+      },
+      {
+        "job_title": "Engineering Manager",
+        "company": "CloudPulse",
+        "start_date": "2016-08",
+        "end_date": "2021-02",
+        "is_current": null
+      }
+    ],
+    "education": [
+      {
+        "degree": "Master of Science in Software Engineering",
+        "institution": "UC Berkeley",
+        "graduation_year": 2012
+      }
+    ]
+  }
+}

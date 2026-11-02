@@ -1,0 +1,52 @@
+{
+  "resume_id": "intl_japan_tokyo",
+  "source_file": "intl_japan_tokyo.pdf",
+  "expected": {
+    "personal_info": {
+      "name": "Kenji Tanaka",
+      "email": "kenji.tanaka@tokyo-lab.jp",
+      "phone": "+81 3 1234 5678",
+      "location": "Tokyo, Japan"
+    },
+    "professional_summary": "Full Stack Engineer with extensive experience in cloud architecture and distributed microservices.",
+    "skills": [
+      "TypeScript",
+      "React",
+      "Node.js",
+      "Go",
+      "AWS",
+      "Docker",
+      "Kubernetes",
+      "PostgreSQL",
+      "Git"
+    ],
+    "languages": [
+      "Japanese",
+      "English"
+    ],
+    "experience": [
+      {
+        "job_title": "Senior Software Engineer",
+        "company": "Rakuten Group",
+        "start_date": "2021-04",
+        "end_date": null,
+        "is_current": true
+      },
+      {
+        "job_title": "Software Engineer",
+        "company": "Sony Corporation",
+        "start_date": "2018-04",
+        "end_date": "2021-03",
+        "is_current": null
+      }
+    ],
+    "education": [
+      {
+        "degree": "Master of Science in Information Science",
+        "institution": "University of Tokyo",
+        "graduation_year": 2018
+      }
+    ],
+    "raw_text": "Kenji Tanaka\nkenji.tanaka@tokyo-lab.jp | +81 3 1234 5678 | Tokyo, Japan\n\nProfessional Summary\nFull Stack Engineer with extensive experience in cloud architecture and distributed microservices.\n\nWork Experience\nSenior Software Engineer, Rakuten Group\nApril 2021 - Present\n- Built scalable web applications using TypeScript and React\n\nSoftware Engineer, Sony Corporation\nApril 2018 - March 2021\n- Developed backend cloud services in Go and AWS\n\nEducation\nMaster of Science in Information Science, University of Tokyo, 2018\n\nSkills\nTypeScript, React, Node.js, Go, AWS, Docker, Kubernetes, PostgreSQL, Git\n\nLanguages\nJapanese, English"
+  }
+}

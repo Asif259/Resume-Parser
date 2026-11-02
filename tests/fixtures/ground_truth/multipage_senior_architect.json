@@ -1,0 +1,56 @@
+{
+  "resume_id": "multipage_senior_architect",
+  "source_file": "multipage_senior_architect.pdf",
+  "expected": {
+    "personal_info": {
+      "name": "Jonathan Sterling",
+      "email": "j.sterling@enterprise.io",
+      "phone": "+1 555 888 9900",
+      "location": "New York, USA"
+    },
+    "professional_summary": "Enterprise Software Architect with over 12 years experience leading distributed systems engineering.",
+    "skills": [
+      "Java",
+      "Python",
+      "Go",
+      "Kafka",
+      "Kubernetes",
+      "Docker",
+      "AWS",
+      "PostgreSQL",
+      "Redis",
+      "Git",
+      "Linux"
+    ],
+    "experience": [
+      {
+        "job_title": "Chief Enterprise Architect",
+        "company": "GlobalFinancial",
+        "start_date": "2020-01",
+        "end_date": null,
+        "is_current": true
+      },
+      {
+        "job_title": "Principal Architect",
+        "company": "TechVenture Partners",
+        "start_date": "2015-04",
+        "end_date": "2019-12",
+        "is_current": null
+      }
+    ],
+    "education": [
+      {
+        "degree": "Master of Science in Computer Science",
+        "institution": "Cornell University",
+        "graduation_year": 2012
+      }
+    ],
+    "certifications": [
+      {
+        "name": "AWS Certified Solutions Architect",
+        "issuer": "Amazon",
+        "date": "2020"
+      }
+    ]
+  }
+}

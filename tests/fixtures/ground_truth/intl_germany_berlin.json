@@ -1,0 +1,51 @@
+{
+  "resume_id": "intl_germany_berlin",
+  "source_file": "intl_germany_berlin.pdf",
+  "expected": {
+    "personal_info": {
+      "name": "Johannes Neumann",
+      "email": "johannes.neumann@berlin-tech.de",
+      "phone": "+49 30 12345678",
+      "location": "Berlin, Germany"
+    },
+    "professional_summary": "Senior Software Engineer and Algorithm Researcher with background in high-performance computing.",
+    "skills": [
+      "Python",
+      "C++",
+      "Go",
+      "Docker",
+      "Kubernetes",
+      "Linux",
+      "Git",
+      "PostgreSQL"
+    ],
+    "languages": [
+      "German",
+      "English"
+    ],
+    "experience": [
+      {
+        "job_title": "Principal Software Engineer",
+        "company": "Berlin Data Systems",
+        "start_date": "2021-01",
+        "end_date": null,
+        "is_current": true
+      },
+      {
+        "job_title": "Senior Software Developer",
+        "company": "Munich Cloud Solutions",
+        "start_date": "2017-04",
+        "end_date": "2020-12",
+        "is_current": null
+      }
+    ],
+    "education": [
+      {
+        "degree": "PhD in Computer Science",
+        "institution": "Technical University of Munich",
+        "graduation_year": 2017
+      }
+    ],
+    "raw_text": "Johannes Neumann\njohannes.neumann@berlin-tech.de | +49 30 12345678 | Berlin, Germany\n\nProfessional Summary\nSenior Software Engineer and Algorithm Researcher with background in high-performance computing.\n\nWork Experience\nPrincipal Software Engineer, Berlin Data Systems\nJanuary 2021 - Present\n- Engineered microservices using Go and Docker\n\nSenior Software Developer, Munich Cloud Solutions\nApril 2017 - December 2020\n- Developed distributed backend pipelines with Python and PostgreSQL\n\nEducation\nPhD in Computer Science, Technical University of Munich, 2017\n\nSkills\nPython, C++, Go, Docker, Kubernetes, Linux, Git, PostgreSQL\n\nLanguages\nGerman, English"
+  }
+}

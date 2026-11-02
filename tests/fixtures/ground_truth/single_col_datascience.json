@@ -1,0 +1,55 @@
+{
+  "resume_id": "single_col_datascience",
+  "source_file": "single_col_datascience.pdf",
+  "expected": {
+    "personal_info": {
+      "name": "Elena Rostova",
+      "email": "elena.rostova@datascience.org",
+      "phone": "+1 555 111 2233",
+      "location": "New York, USA"
+    },
+    "professional_summary": "Lead Data Scientist with 6 years experience building production ML pipelines and predictive models.",
+    "skills": [
+      "Python",
+      "PyTorch",
+      "Pandas",
+      "Scikit-learn",
+      "SQL",
+      "AWS",
+      "Docker",
+      "Git",
+      "Linux"
+    ],
+    "experience": [
+      {
+        "job_title": "Lead Data Scientist",
+        "company": "DataCorp",
+        "start_date": "2021-03",
+        "end_date": null,
+        "is_current": true
+      },
+      {
+        "job_title": "Data Scientist",
+        "company": "AnalyticsHub",
+        "start_date": "2018-07",
+        "end_date": "2021-02",
+        "is_current": null
+      }
+    ],
+    "education": [
+      {
+        "degree": "Master of Science in Data Science",
+        "institution": "Columbia University",
+        "graduation_year": 2018
+      }
+    ],
+    "certifications": [
+      {
+        "name": "AWS Certified Machine Learning Specialist",
+        "issuer": "Amazon",
+        "date": "2022"
+      }
+    ],
+    "raw_text": "Elena Rostova\nelena.rostova@datascience.org | +1 555 111 2233 | New York, USA\n\nProfessional Summary\nLead Data Scientist with 6 years experience building production ML pipelines and predictive models.\n\nWork Experience\nLead Data Scientist, DataCorp\nMarch 2021 - Present\n- Built real-time recommendation engine using Python and PyTorch\n- Deployed models to AWS with Docker\n\nData Scientist, AnalyticsHub\nJuly 2018 - February 2021\n- Developed churn prediction models using Scikit-learn and Pandas\n- Automated ETL pipelines with SQL\n\nEducation\nMaster of Science in Data Science, Columbia University, 2018\n\nSkills\nPython, PyTorch, Pandas, Scikit-learn, SQL, AWS, Docker, Git, Linux\n\nCertifications\nAWS Certified Machine Learning Specialist (Amazon, 2022)"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "resume_id": "single_col_mobile",
+  "source_file": "single_col_mobile.pdf",
+  "expected": {
+    "personal_info": {
+      "name": "Sophia Martinez",
+      "email": "sophia.m@mobiledev.io",
+      "phone": "+1 555 333 4455",
+      "location": "Austin, USA"
+    },
+    "professional_summary": "Mobile Applications Developer with expertise in iOS, Android, and cross-platform frameworks.",
+    "skills": [
+      "Swift",
+      "Kotlin",
+      "Flutter",
+      "React Native",
+      "iOS",
+      "Android",
+      "Git",
+      "REST",
+      "GraphQL",
+      "Firebase"
+    ],
+    "experience": [
+      {
+        "job_title": "Senior Mobile Engineer",
+        "company": "AppWorks",
+        "start_date": "2021-08",
+        "end_date": null,
+        "is_current": true
+      },
+      {
+        "job_title": "iOS Developer",
+        "company": "SwiftCraft",
+        "start_date": "2019-01",
+        "end_date": "2021-07",
+        "is_current": null
+      }
+    ],
+    "education": [
+      {
+        "degree": "Bachelor of Science in Software Development",
+        "institution": "UT Austin",
+        "graduation_year": 2018
+      }
+    ],
+    "raw_text": "Sophia Martinez\nsophia.m@mobiledev.io | +1 555 333 4455 | Austin, USA\n\nProfessional Summary\nMobile Applications Developer with expertise in iOS, Android, and cross-platform frameworks.\n\nWork Experience\nSenior Mobile Engineer, AppWorks\nAugust 2021 - Present\n- Developed cross-platform applications in Flutter and React Native\n- Integrated REST and GraphQL APIs with Firebase backends\n\niOS Developer, SwiftCraft\nJanuary 2019 - July 2021\n- Built native iOS applications using Swift\n\nEducation\nBachelor of Science in Software Development, UT Austin, 2018\n\nSkills\nSwift, Kotlin, Flutter, React Native, iOS, Android, Git, REST, GraphQL, Firebase"
+  }
+}

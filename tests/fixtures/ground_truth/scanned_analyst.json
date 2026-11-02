@@ -1,0 +1,39 @@
+{
+  "resume_id": "scanned_analyst",
+  "source_file": "scanned_analyst.pdf",
+  "expected": {
+    "personal_info": {
+      "name": "Samantha Miller",
+      "email": "samantha.miller@bizsystems.net",
+      "phone": "+1 555 567 1234",
+      "location": "Portland, USA"
+    },
+    "professional_summary": "Business Systems Analyst bridging technical engineering and business stakeholders.",
+    "skills": [
+      "SQL",
+      "Python",
+      "Tableau",
+      "Agile",
+      "Jira",
+      "Excel",
+      "Git"
+    ],
+    "experience": [
+      {
+        "job_title": "Senior Business Analyst",
+        "company": "DataBridge Systems",
+        "start_date": "2021-06",
+        "end_date": null,
+        "is_current": true
+      }
+    ],
+    "education": [
+      {
+        "degree": "Bachelor of Science in Information Systems",
+        "institution": "Portland State University",
+        "graduation_year": 2020
+      }
+    ],
+    "raw_text": "Samantha Miller\nsamantha.miller@bizsystems.net | +1 555 567 1234 | Portland, USA\n\nProfessional Summary\nBusiness Systems Analyst bridging technical engineering and business stakeholders.\n\nWork Experience\nSenior Business Analyst, DataBridge Systems\nJune 2021 - Present\n- Gathered technical requirements and built SQL models\n\nEducation\nBachelor of Science in Information Systems, Portland State University, 2020\n\nSkills\nSQL, Python, Tableau, Agile, Jira, Excel, Git"
+  }
+}
