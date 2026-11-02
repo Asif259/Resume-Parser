@@ -1,26 +1,82 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fbfcfc;
+  --foreground: #0f172a;
+  --surface: #ffffff;
+  --surface-muted: #f4f7f7;
+  --border: #e0e5e9;
+  --border-subtle: #edf2f4;
+  --brand: #055b65;
+  --brand-hover: #033c43;
+  --accent-lime: #1bd488;
+  --teal-slate: #45828b;
+  --teal-light: #b2c9c5;
+  --text-primary: #0a1b1e;
+  --text-secondary: #3b5055;
+  --text-muted: #5e777c;
 }
 
 @theme inline {
+  --color-canvas: #fbfcfc;
+  --color-city: #e0e5e9;
+  --color-teal-light: #b2c9c5;
+  --color-lime-retro: #1bd488;
+  --color-lime-hover: #16bc78;
+  --color-teal-slate: #45828b;
+  --color-jewel: #055b65;
+  --color-jewel-dark: #033c43;
+  --color-jewel-light: #09727e;
+  --color-jewel-surface: #f0f7f7;
+  --color-jewel-surface-border: #d0e4e6;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--background);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Subtle, functional scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Focus visibility for keyboard navigation */
+*:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

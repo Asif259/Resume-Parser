@@ -1,59 +1,20 @@
 "use client";
 
-import { Experience } from "@/types/resume";
-import { Briefcase, Calendar } from "lucide-react";
+import { Experience, FieldEvidence } from "@/types/resume";
+import { ExperienceTimelineCard } from "@/components/experience-timeline";
 
 interface ExperienceCardProps {
   experience: Experience;
+  evidence?: Record<string, FieldEvidence> | null;
+  index?: number;
 }
 
-export function ExperienceCard({ experience }: ExperienceCardProps) {
-  const { job_title, company, start_date, end_date, is_current, description } = experience;
-
-  const displayEnd = is_current ? "Present" : end_date;
-  const dateDisplay =
-    start_date || displayEnd
-      ? `${start_date || "Unknown"} — ${displayEnd || "Present"}`
-      : null;
-
+export function ExperienceCard({ experience, evidence, index = 0 }: ExperienceCardProps) {
   return (
-    <div className="border border-gray-100 rounded-xl p-4 bg-gray-50/50 hover:bg-white hover:shadow-md transition">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-2">
-        <div className="flex items-center gap-2">
-          <div className="p-2 rounded-lg bg-blue-100/60 text-blue-700">
-            <Briefcase className="w-4 h-4" />
-          </div>
-          <div>
-            <h4 className="font-semibold text-gray-900 text-base">
-              {job_title || "Untitled Role"}
-            </h4>
-            {company && <p className="text-sm font-medium text-gray-600">{company}</p>}
-          </div>
-        </div>
-
-        {dateDisplay && (
-          <div className="flex items-center gap-1.5 text-xs text-gray-500 font-medium">
-            <Calendar className="w-3.5 h-3.5" />
-            <span>{dateDisplay}</span>
-            {is_current && (
-              <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
-                Current
-              </span>
-            )}
-          </div>
-        )}
-      </div>
-
-      {description && description.length > 0 && (
-        <ul className="mt-3 space-y-1.5 pl-4 list-disc text-sm text-gray-600">
-          {description.map((item, idx) => (
-            <li key={idx} className="leading-relaxed">
-              {item}
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
+    <ExperienceTimelineCard
+      experience={experience}
+      index={index}
+      evidence={evidence}
+    />
   );
 }
-

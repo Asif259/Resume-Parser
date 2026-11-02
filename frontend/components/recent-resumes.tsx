@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { listResumes } from "@/lib/api";
 import { ParseResponse } from "@/types/resume";
-import { FileText, ArrowRight, Database, Loader2 } from "lucide-react";
+import { ConfidenceBadge } from "@/components/confidence-badge";
+import { FileText, ArrowRight, Clock } from "lucide-react";
 
 export function RecentResumes() {
   const [resumes, setResumes] = useState<ParseResponse[]>([]);
@@ -31,11 +32,38 @@ export function RecentResumes() {
     };
   }, []);
 
+  const formatDate = (dateStr: string): string => {
+    try {
+      const date = new Date(dateStr);
+      return new Intl.DateTimeFormat("en-US", {
+        month: "short",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+      }).format(date);
+    } catch {
+      return dateStr;
+    }
+  };
+
   if (loading) {
     return (
-      <div className="pt-8 border-t border-gray-100 flex items-center justify-center py-6 text-gray-400">
-        <Loader2 className="w-5 h-5 animate-spin mr-2" />
-        <span className="text-xs">Loading parsed documents...</span>
+      <div className="pt-6 border-t border-slate-200 space-y-3">
+        <div className="h-4 w-32 bg-slate-200 rounded animate-pulse" />
+        <div className="divide-y divide-slate-100 border border-slate-200 rounded-lg bg-white overflow-hidden">
+          {Array.from({ length: 3 }).map((_, i) => (
+            <div key={i} className="p-3.5 flex items-center justify-between animate-pulse">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded bg-slate-100" />
+                <div className="space-y-1.5">
+                  <div className="h-3.5 w-36 bg-slate-200 rounded" />
+                  <div className="h-3 w-24 bg-slate-100 rounded" />
+                </div>
+              </div>
+              <div className="h-5 w-16 bg-slate-100 rounded" />
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
@@ -45,39 +73,74 @@ export function RecentResumes() {
   }
 
   return (
-    <div className="pt-8 border-t border-gray-100">
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-          <Database className="w-5 h-5 text-gray-400" />
-          Parsed Resumes ({resumes.length})
-        </h2>
+    <div className="pt-8 border-t border-[#E0E5E9] space-y-4">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <h2 className="text-sm font-semibold text-[#055B65]">
+            Recent Resumes
+          </h2>
+          <span className="text-xs text-[#45828B] tabular-nums font-mono">
+            ({resumes.length})
+          </span>
+        </div>
       </div>
 
-      <div className="grid gap-3 sm:grid-cols-2">
-        {resumes.map((item) => (
-          <Link
-            key={item.id}
-            href={`/results/${item.id}`}
-            className="flex items-center justify-between p-4 rounded-xl border border-gray-200/80 bg-white hover:border-blue-300 hover:shadow-sm transition group"
-          >
-            <div className="flex items-center gap-3 min-w-0">
-              <div className="p-2 rounded-lg bg-gray-100 group-hover:bg-blue-50 text-gray-600 group-hover:text-blue-600 transition">
-                <FileText className="w-4 h-4" />
+      <div className="divide-y divide-[#E0E5E9] border border-[#E0E5E9] rounded-lg bg-white overflow-hidden shadow-2xs">
+        {resumes.map((item) => {
+          const name = item.parsed_resume?.personal_info?.name;
+          const confidence = item.parsed_resume?.confidence_score;
+          const skillsCount = item.parsed_resume?.skills?.length || 0;
+          const expCount = item.parsed_resume?.experience?.length || 0;
+
+          return (
+            <Link
+              key={item.id}
+              href={`/resumes/${item.id}`}
+              className="flex items-center justify-between p-3.5 hover:bg-[#055B65]/5 transition-colors group"
+            >
+              <div className="flex items-center gap-3 min-w-0">
+                <div className="p-2 rounded bg-[#E0E5E9]/50 text-slate-500 group-hover:text-[#055B65] group-hover:bg-[#055B65]/10 transition-colors shrink-0">
+                  <FileText className="w-4 h-4" />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold text-slate-900 truncate group-hover:text-[#055B65] transition-colors">
+                    {name || item.filename}
+                  </p>
+                  <div className="flex items-center gap-2 text-xs text-[#45828B] mt-0.5">
+                    <span className="truncate max-w-[150px] font-mono text-[11px]">
+                      {item.filename}
+                    </span>
+                    <span className="text-[#B2C9C5]">•</span>
+                    <span className="tabular-nums">
+                      {skillsCount} skills
+                    </span>
+                    <span className="text-[#B2C9C5]">•</span>
+                    <span className="tabular-nums">
+                      {expCount} roles
+                    </span>
+                    {item.created_at && (
+                      <>
+                        <span className="hidden sm:inline text-[#B2C9C5]">•</span>
+                        <span className="hidden sm:inline-flex items-center gap-1 text-[11px] text-[#45828B]">
+                          <Clock className="w-3 h-3 text-[#45828B]" />
+                          <span>{formatDate(item.created_at)}</span>
+                        </span>
+                      </>
+                    )}
+                  </div>
+                </div>
               </div>
-              <div className="min-w-0">
-                <p className="text-sm font-semibold text-gray-900 truncate">
-                  {item.parsed_resume.personal_info.name || item.filename}
-                </p>
-                <p className="text-xs text-gray-400 truncate">
-                  {item.filename}
-                </p>
+
+              <div className="flex items-center gap-3 shrink-0 ml-4">
+                {confidence !== null && confidence !== undefined && (
+                  <ConfidenceBadge score={confidence} size="sm" />
+                )}
+                <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-[#055B65] group-hover:translate-x-0.5 transition-all" />
               </div>
-            </div>
-            <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition flex-shrink-0" />
-          </Link>
-        ))}
+            </Link>
+          );
+        })}
       </div>
     </div>
   );
 }
-

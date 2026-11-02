@@ -35,6 +35,8 @@ export interface Project {
   technologies: string[];
 }
 
+export type ExtractionMethod = "rules" | "ml" | "semantic" | "hybrid" | string;
+
 export interface FieldEvidence {
   value: string;
   normalized_value: string | null;
@@ -42,7 +44,7 @@ export interface FieldEvidence {
   source_text: string;
   confidence: number;
   page: number | null;
-  extraction_method?: string | null;
+  extraction_method?: ExtractionMethod | null;
   calibrated_confidence?: number | null;
 }
 
@@ -67,4 +69,3 @@ export interface ParseResponse {
   parsed_resume: ParsedResume;
   created_at: string;
 }
-
