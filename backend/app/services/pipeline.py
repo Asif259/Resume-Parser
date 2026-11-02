@@ -12,7 +12,12 @@ from app.services.information_grouper import group_information
 from app.services.normalizer import normalize
 from app.services.confidence import compute_overall_confidence, flag_low_confidence
 
-def parse_resume(file_path: Path, file_type: str) -> ParsedResume:
+def parse_resume(
+    file_path: Path,
+    file_type: str,
+    use_ml: bool = False,
+    use_semantic: bool = False,
+) -> ParsedResume:
     """End-to-end orchestration pipeline:
     Document Extraction -> Preprocessing -> Section Detection ->
     Entity Extraction -> Skill Normalization -> Information Grouping ->
@@ -41,11 +46,19 @@ def parse_resume(file_path: Path, file_type: str) -> ParsedResume:
     # 3. Section Detection
     sections = detect_sections(cleaned_text)
 
-    # 4. Entity Extraction (Regex + spaCy)
-    entities = extract_entities(sections)
+    # 4. Entity Extraction (Hybrid: Rules + ML)
+    if use_ml:
+        from app.services.hybrid_extractor import HybridExtractor
+        hybrid = HybridExtractor(use_ml=True)
+        entities = hybrid.extract(sections, raw_text=raw_text)
+    else:
+        entities = extract_entities(sections)
 
     # 5. Skill Extraction & Normalization
-    skills, skill_evidence = extract_skills_with_evidence(sections)
+    skills, skill_evidence = extract_skills_with_evidence(
+        sections,
+        use_semantic=use_semantic,
+    )
 
     # 6. Information Grouping (Experience & Education)
     grouped = group_information(sections, entities)

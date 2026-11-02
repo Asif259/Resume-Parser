@@ -15,7 +15,9 @@ class EvaluationReport:
 
 def run_evaluation(
     fixtures_dir: Union[str, Path],
-    ground_truth_dir: Union[str, Path]
+    ground_truth_dir: Union[str, Path],
+    use_ml: bool = False,
+    use_semantic: bool = False,
 ) -> EvaluationReport:
     fixtures_dir = Path(fixtures_dir)
     ground_truth_dir = Path(ground_truth_dir)
@@ -31,7 +33,12 @@ def run_evaluation(
             continue
 
         ext = resume_path.suffix.lstrip(".").lower()
-        actual = parse_resume(resume_path, ext)
+        actual = parse_resume(
+            resume_path,
+            ext,
+            use_ml=use_ml,
+            use_semantic=use_semantic,
+        )
         comparisons = compare_resumes(gt.expected, actual)
         metrics = compute_metrics(comparisons)
 
