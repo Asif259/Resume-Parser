@@ -1,0 +1,42 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    image: resume-parser-backend:latest
+    container_name: resume-parser-backend
+    restart: unless-stopped
+    ports:
+      # Bind strictly to loopback interface - internal access only via Nginx reverse proxy
+      - "127.0.0.1:8000:8000"
+    volumes:
+      # Persistent host directory mounts
+      - /opt/resume-parser/data:/app/data
+      - /opt/resume-parser/uploads:/app/uploads
+      - /opt/resume-parser/models/ner:/app/models/ner
+      - /opt/resume-parser/cache/huggingface:/app/cache/huggingface
+    env_file:
+      - .env
+    environment:
+      - APP_ENV=${APP_ENV:-production}
+      - DATABASE_URL=${DATABASE_URL:-sqlite:////app/data/resumes.db}
+      - UPLOAD_DIR=${UPLOAD_DIR:-/app/uploads}
+      - MODEL_DIR=${MODEL_DIR:-/app/models/ner}
+      - HF_HOME=${HF_HOME:-/app/cache/huggingface}
+      - FORCE_CPU=true
+      - USE_ML=${USE_ML:-true}
+      - USE_SEMANTIC=${USE_SEMANTIC:-true}
+      - RATE_LIMIT_PER_MINUTE=${RATE_LIMIT_PER_MINUTE:-60}
+      - CORS_ORIGINS=${CORS_ORIGINS:-["https://app.YOUR_DOMAIN.com"]}
+      - API_KEY=${API_KEY:-}
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://127.0.0.1:8000/health || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "5"
