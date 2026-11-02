@@ -4,6 +4,7 @@ from PIL import Image
 import pytesseract
 import fitz  # PyMuPDF
 
+from app.config import settings
 from app.services.pdf_extractor import ExtractedText
 
 def extract_image(path: Path) -> ExtractedText:
@@ -39,6 +40,11 @@ def extract_pdf_ocr(path: Path, dpi: int = 200) -> ExtractedText:
 
     doc = fitz.open(str(path))
     pages_count = len(doc)
+    if pages_count > settings.MAX_PDF_PAGES:
+        doc.close()
+        raise ValueError(
+            f"PDF exceeds maximum page limit of {settings.MAX_PDF_PAGES} pages (found {pages_count})"
+        )
     text_chunks: list[str] = []
 
     for page_idx, page in enumerate(doc):

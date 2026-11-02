@@ -3,6 +3,7 @@ from pathlib import Path
 import re
 from typing import Any
 import fitz  # PyMuPDF
+from app.config import settings
 
 @dataclass
 class ExtractedText:
@@ -95,6 +96,11 @@ def extract_pdf(path: Path) -> ExtractedText:
 
     doc = fitz.open(str(path))
     pages_count = len(doc)
+    if pages_count > settings.MAX_PDF_PAGES:
+        doc.close()
+        raise ValueError(
+            f"PDF exceeds maximum page limit of {settings.MAX_PDF_PAGES} pages (found {pages_count})"
+        )
     text_chunks: list[str] = []
     has_multi_column = False
 
