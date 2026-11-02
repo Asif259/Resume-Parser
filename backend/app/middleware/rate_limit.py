@@ -50,3 +50,4 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
         self.ip_history[client_ip] = timestamps
 
         return await call_next(request)
+

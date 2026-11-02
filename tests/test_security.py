@@ -130,3 +130,4 @@ def test_api_key_authentication(sample_pdf_bytes, monkeypatch):
     # Request with valid key -> 200
     res_good_key = client.get("/api/resumes", headers={"X-API-Key": "super-secret-token"})
     assert res_good_key.status_code == 200
+
