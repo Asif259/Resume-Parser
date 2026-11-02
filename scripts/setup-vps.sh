@@ -148,3 +148,4 @@ log_success "4. Configure Nginx site: /etc/nginx/sites-available/resume-parser-a
 log_success "5. Run: certbot --nginx -d api.YOUR_DOMAIN.com"
 log_success "6. Run: docker compose up -d --build"
 log_success "=========================================================="
+

@@ -257,3 +257,4 @@ If an update fails:
    - `1` to revert to previous Docker image
    - `2` to restore SQLite database from a selected backup archive
    - `3` to perform a clean service restart
+

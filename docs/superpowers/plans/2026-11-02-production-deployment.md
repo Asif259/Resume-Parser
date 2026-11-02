@@ -249,3 +249,4 @@ Run: `pytest` and `cd frontend && npm run build` to confirm 100% passing state.
 git add DEPLOYMENT.md
 git commit -m "docs: add comprehensive production deployment runbook and verification procedures"
 ```
+

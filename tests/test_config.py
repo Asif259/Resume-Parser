@@ -28,3 +28,4 @@ def test_model_dir_env_override(monkeypatch):
     import app.ml.config
     importlib.reload(app.ml.config)
     assert str(app.ml.config.MODEL_DIR) == custom_path
+

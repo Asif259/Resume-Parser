@@ -68,3 +68,4 @@ DELETED_COUNT=$(find "$BACKUP_DIR" -name "resumes_*.db.gz" -type f -mtime +30 -p
 log "Pruned ${DELETED_COUNT} old backup archives."
 
 log "Backup completed successfully."
+

@@ -65,3 +65,4 @@ echo ""
 echo "=== Model Deployment Successful! ==="
 echo "Files deployed to ${TARGET_HOST}:${REMOTE_MODEL_DIR}"
 ssh -p "$SSH_PORT" "$TARGET_HOST" "ls -lh ${REMOTE_MODEL_DIR}"
+

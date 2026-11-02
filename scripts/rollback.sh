@@ -81,3 +81,4 @@ else
     echo ""
     echo "[!] Health check failed. Check logs: docker compose logs backend"
 fi
+
