@@ -90,3 +90,4 @@ def get_semantic_matcher(threshold: float = 0.75) -> SemanticSkillMatcher:
     if _MATCHER_INSTANCE is None:
         _MATCHER_INSTANCE = SemanticSkillMatcher(threshold=threshold)
     return _MATCHER_INSTANCE
+

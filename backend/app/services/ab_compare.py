@@ -90,3 +90,4 @@ def format_ab_report(comparison: dict[str, Any]) -> str:
 
     lines.append("=" * 60)
     return "\n".join(lines)
+

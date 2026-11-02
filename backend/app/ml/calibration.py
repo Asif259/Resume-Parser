@@ -98,3 +98,4 @@ def compute_ece(
             ece += (bin_count / n) * abs(bin_acc - bin_conf)
 
     return round(float(ece), 4)
+

@@ -58,3 +58,4 @@ def test_confidence_service_uses_calibrated_confidence():
     # compute_overall_confidence should use 0.50
     overall = compute_overall_confidence(evidence)
     assert overall == pytest.approx(0.50, abs=0.01)
+

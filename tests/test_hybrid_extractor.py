@@ -77,3 +77,4 @@ def test_compute_deltas():
         "deltas": {"precision": 0.02, "recall": 0.05, "f1": 0.03, "exact_matches": 1, "per_field": deltas},
     })
     assert "PIPELINE A/B COMPARISON REPORT" in table
+

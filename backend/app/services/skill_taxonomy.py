@@ -427,3 +427,4 @@ SKILL_TAXONOMY: dict[str, dict[str, Any]] = {
         "description": "REST Representational State Transfer web API architecture",
     },
 }
+

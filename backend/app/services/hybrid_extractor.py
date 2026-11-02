@@ -25,3 +25,4 @@ class HybridExtractor:
         except Exception:
             # Fallback cleanly to rules if ML inference fails
             return rules_entities
+
