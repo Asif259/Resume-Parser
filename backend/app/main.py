@@ -37,4 +37,13 @@ app.include_router(parse.router)
 
 @app.get("/health")
 def health_check():
-    return {"status": "ok", "project": settings.PROJECT_NAME}
+    return {
+        "status": "ok",
+        "project": settings.PROJECT_NAME,
+        "environment": settings.APP_ENV,
+        "models": {
+            "spacy": "loaded",
+            "distilbert_ner": "available",
+            "sentence_transformers": "available",
+        },
+    }

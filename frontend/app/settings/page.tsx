@@ -95,7 +95,7 @@ export default function SettingsPage() {
               </span>
             </div>
             <p className="text-[11px] text-[#45828B] font-mono">
-              Target: {process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}
+              Target: {process.env.NEXT_PUBLIC_API_BASE_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}
             </p>
           </div>
 

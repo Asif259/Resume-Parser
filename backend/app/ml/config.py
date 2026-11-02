@@ -1,6 +1,23 @@
+import os
 from pathlib import Path
 import torch
-from tools.annotation_schema import BIO_TAGS
+
+try:
+    from tools.annotation_schema import BIO_TAGS
+except ImportError:
+    BIO_TAGS = [
+        "PERSON_NAME",
+        "EMAIL",
+        "PHONE",
+        "LOCATION",
+        "JOB_TITLE",
+        "COMPANY",
+        "DEGREE",
+        "INSTITUTION",
+        "SKILL",
+        "DATE",
+        "CERT_NAME",
+    ]
 
 # 23 BIO labels
 ALL_LABELS: list[str] = ["O"] + [f"B-{t}" for t in BIO_TAGS] + [f"I-{t}" for t in BIO_TAGS]
@@ -19,13 +36,17 @@ PROJECT_ROOT = Path(__file__).resolve().parents[3]
 FIXTURES_DIR = PROJECT_ROOT / "tests" / "fixtures"
 BIO_DIR = FIXTURES_DIR / "bio"
 SPLITS_FILE = FIXTURES_DIR / "splits.json"
-MODEL_DIR = PROJECT_ROOT / "models" / "ner"
+MODEL_DIR = Path(os.getenv("MODEL_DIR", str(PROJECT_ROOT / "models" / "ner")))
 
 def get_device() -> str:
-    """Returns torch device string: 'mps' on Apple Silicon, 'cuda', or 'cpu'."""
-    if torch.backends.mps.is_available():
-        return "mps"
+    """Returns torch device string: 'mps' on Apple Silicon, 'cuda', or 'cpu'.
+    Can be forced via FORCE_CPU=true in production container environments.
+    """
+    if os.getenv("FORCE_CPU", "").lower() in ("true", "1", "yes"):
+        return "cpu"
     if torch.cuda.is_available():
         return "cuda"
+    if torch.backends.mps.is_available():
+        return "mps"
     return "cpu"
 

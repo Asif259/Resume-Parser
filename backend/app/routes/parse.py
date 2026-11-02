@@ -47,7 +47,12 @@ async def upload_and_parse_resume(
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
 
     try:
-        parsed_resume = parse_resume(file_path=saved_path, file_type=ext)
+        parsed_resume = parse_resume(
+            file_path=saved_path,
+            file_type=ext,
+            use_ml=settings.USE_ML,
+            use_semantic=settings.USE_SEMANTIC,
+        )
     except ValueError as e:
         if saved_path.exists():
             saved_path.unlink()
