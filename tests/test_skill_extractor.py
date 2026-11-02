@@ -68,3 +68,20 @@ def test_short_skill_dbt_boundary():
     result = extract_skills(sections)
     assert "dbt" in result
 
+def test_semantic_matcher():
+    from app.services.semantic_matcher import SemanticSkillMatcher
+    matcher = SemanticSkillMatcher(threshold=0.65)
+    matched = matcher.match("PostgreSQL database")
+    assert matched is not None
+    assert matched[0] == "PostgreSQL"
+    assert matched[1] >= 0.65
+
+def test_extract_skills_with_semantic_evidence():
+    from app.services.skill_extractor import extract_skills_with_evidence
+    sections = {"skills": "PostgreSQL database, Pythonic coding"}
+    skills, evidence = extract_skills_with_evidence(sections, use_semantic=True, semantic_threshold=0.65)
+    assert "PostgreSQL" in skills
+    assert "PostgreSQL" in evidence
+    assert evidence["PostgreSQL"].extraction_method in ("dictionary", "semantic")
+
+

@@ -42,6 +42,8 @@ export interface FieldEvidence {
   source_text: string;
   confidence: number;
   page: number | null;
+  extraction_method?: string | null;
+  calibrated_confidence?: number | null;
 }
 
 export interface ParsedResume {

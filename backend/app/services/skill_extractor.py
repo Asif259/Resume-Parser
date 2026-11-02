@@ -209,10 +209,15 @@ def _match_skill_in_text(text_lower: str, alias: str) -> bool:
     return bool(re.search(pattern, text_lower))
 
 
-def extract_skills_with_evidence(sections: dict[str, str]) -> tuple[list[str], dict[str, FieldEvidence]]:
+def extract_skills_with_evidence(
+    sections: dict[str, str],
+    use_semantic: bool = False,
+    semantic_threshold: float = 0.68,
+) -> tuple[list[str], dict[str, FieldEvidence]]:
     """Extract and normalize skills from resume sections, preserving field evidence."""
     found: set[str] = set()
     evidence: dict[str, FieldEvidence] = {}
+    unmatched_tokens: list[str] = []
 
     skills_text = sections.get("skills", "")
 
@@ -233,11 +238,14 @@ def extract_skills_with_evidence(sections: dict[str, str]) -> tuple[list[str], d
                         source_section="skills",
                         source_text=token.strip(),
                         confidence=0.95,
+                        extraction_method="dictionary",
                     )
                 continue
+            matched_alias = False
             for alias, canon in _ALIAS_TO_CANONICAL.items():
                 if alias in token_clean and _match_skill_in_text(token_clean, alias):
                     found.add(canon)
+                    matched_alias = True
                     if canon not in evidence:
                         evidence[canon] = FieldEvidence(
                             value=alias,
@@ -245,9 +253,32 @@ def extract_skills_with_evidence(sections: dict[str, str]) -> tuple[list[str], d
                             source_section="skills",
                             source_text=token.strip(),
                             confidence=0.90,
+                            extraction_method="dictionary",
                         )
+            if not matched_alias and len(token_clean) >= 3:
+                unmatched_tokens.append(token.strip())
 
-    # 2. Scan other sections for skill mentions
+    # 2. Semantic matching for unmatched skill phrases
+    if use_semantic and unmatched_tokens:
+        try:
+            from app.services.semantic_matcher import get_semantic_matcher
+            matcher = get_semantic_matcher(threshold=semantic_threshold)
+            matches = matcher.match_batch(unmatched_tokens)
+            for cand, canonical, score in matches:
+                if canonical not in found:
+                    found.add(canonical)
+                    evidence[canonical] = FieldEvidence(
+                        value=cand,
+                        normalized_value=canonical,
+                        source_section="skills",
+                        source_text=cand,
+                        confidence=score,
+                        extraction_method="semantic",
+                    )
+        except Exception:
+            pass
+
+    # 3. Scan other sections for skill mentions
     scan_sections = ["experience", "summary", "projects", "education", "other"]
     for sec_name in scan_sections:
         sec_text = sections.get(sec_name, "")
@@ -268,6 +299,7 @@ def extract_skills_with_evidence(sections: dict[str, str]) -> tuple[list[str], d
                         source_section=sec_name,
                         source_text=alias,
                         confidence=0.75,
+                        extraction_method="dictionary",
                     )
             elif alias in sec_lower:
                 if _match_skill_in_text(sec_lower, alias):
@@ -278,6 +310,7 @@ def extract_skills_with_evidence(sections: dict[str, str]) -> tuple[list[str], d
                         source_section=sec_name,
                         source_text=alias,
                         confidence=0.75,
+                        extraction_method="dictionary",
                     )
 
     return sorted(found), evidence
