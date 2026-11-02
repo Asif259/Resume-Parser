@@ -78,6 +78,15 @@ def parse_resume(
     )
 
     if parsed_resume.evidence:
+        if use_ml:
+            try:
+                from app.ml.calibration import ConfidenceCalibrator
+                calibrator = ConfidenceCalibrator.load()
+                for ev in parsed_resume.evidence.values():
+                    ev.calibrated_confidence = calibrator.calibrate(ev.confidence)
+            except Exception:
+                pass
+
         parsed_resume.confidence_score = compute_overall_confidence(parsed_resume.evidence)
         parsed_resume.low_confidence_fields = flag_low_confidence(parsed_resume.evidence)
 

@@ -55,9 +55,21 @@ export function ParsedResumeView({ resume, filename }: ParsedResumeViewProps) {
               </span>
             )}
             {resume.evidence && (
-              <span className="text-[11px] font-medium text-blue-600 bg-blue-50 px-2 py-0.5 rounded border border-blue-100">
-                Provenance tracked ({Object.keys(resume.evidence).length} fields)
-              </span>
+              <>
+                <span className="text-[11px] font-medium text-blue-600 bg-blue-50 px-2 py-0.5 rounded border border-blue-100">
+                  Provenance tracked ({Object.keys(resume.evidence).length} fields)
+                </span>
+                {Object.values(resume.evidence).some((e) => e.extraction_method === "hybrid" || e.extraction_method === "ml") && (
+                  <span className="text-[11px] font-semibold text-purple-700 bg-purple-50 px-2 py-0.5 rounded border border-purple-200">
+                    AI/ML Hybrid Active
+                  </span>
+                )}
+                {Object.values(resume.evidence).some((e) => e.extraction_method === "semantic") && (
+                  <span className="text-[11px] font-semibold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200">
+                    Semantic Matching
+                  </span>
+                )}
+              </>
             )}
           </div>
 

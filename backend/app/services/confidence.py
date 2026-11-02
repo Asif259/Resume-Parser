@@ -29,7 +29,8 @@ def compute_overall_confidence(evidence: Dict[str, FieldEvidence]) -> float:
         else:
             weight = 1.0
 
-        conf = max(0.0, min(1.0, ev.confidence))
+        conf = ev.calibrated_confidence if ev.calibrated_confidence is not None else ev.confidence
+        conf = max(0.0, min(1.0, conf))
         weighted_sum += conf * weight
         total_weight += weight
 
@@ -42,7 +43,8 @@ def flag_low_confidence(evidence: Dict[str, FieldEvidence], threshold: float = 0
     """Returns a sorted list of field keys where extraction confidence is below the threshold."""
     low_fields: List[str] = []
     for key, ev in evidence.items():
-        if ev.confidence < threshold:
+        effective_conf = ev.calibrated_confidence if ev.calibrated_confidence is not None else ev.confidence
+        if effective_conf < threshold:
             low_fields.append(key)
     return sorted(low_fields)
 
